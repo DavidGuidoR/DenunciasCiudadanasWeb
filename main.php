@@ -14,8 +14,9 @@
                 <li class="nav-menu-item"><a href="" class="nav-menu-link nav-link">Realizar reporte</a></li>
                 <li class="nav-menu-item"><a href="" class="nav-menu-link nav-link">Revisar reportes</a></li>
                 <li class="nav-menu-item"><a href="" class="nav-menu-link nav-link">Perfil</a></li>
-                <li class="nav-menu-item"><a href="" class="nav-menu-link nav-link">Registrarse</a></li>
-                <li class="nav-menu-item"><a href="" class="nav-menu-link nav-link">Iniciar sesión</a></li>
+                <li class="nav-menu-item"><button class="button"><a href="" class="nav-menu-link nav-link">Registrarse</a></button></li>
+                <li class="nav-menu-item"><button class="button"><a href="" class="nav-menu-link nav-link">Iniciar sesión</a></button></li>
+
             </ul>
         </nav>
 
@@ -24,8 +25,9 @@
         </div>
 
         <div class="content-mensj">
-            REVISA REPORTES CERCANOS EN TU ZONA<br>
-            TE ESTAMOS ESCUCHANDO
+            <p>
+                REVISA REPORTES CERCANOS EN TU ZONA<br>
+                TE ESTAMOS ESCUCHANDO</p>
         </div>
 
         <div class="content-button">
