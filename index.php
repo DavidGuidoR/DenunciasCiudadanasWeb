@@ -25,7 +25,7 @@
 
         <div class="content-mensj">
             REVISA REPORTES CERCANOS EN TU ZONA<br>
-            TE ESTAMOS ESCUCHANDO :)
+            TE ESTAMOS ESCUCHANDO como gobiern
         </div>
 
         <div class="content-button">
