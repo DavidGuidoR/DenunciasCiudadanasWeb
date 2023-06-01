@@ -1,0 +1,59 @@
+<!-- De esta manera incluimos el header desde el documento partials -->
+<%- include('partials/_header')%> 
+<article id="iniciosesion">
+<div id=contenedorsesion>
+
+    <form action="/inicioSesion" method="post" onsubmit="return validarFormulario()">
+
+        <a href="/pantallaMenuPrincipal">
+            <i class="fa-sharp fa-solid fa-arrow-left"></i>
+        </a>
+
+        <img src="/images/v.svg">
+
+        <h2>Iniciar sesión</h2>
+<style>
+  .opcionesSesion a:nth-child(1){
+    background-color: black;
+  }
+</style>
+        <section class="opcionesSesion">
+          <a href="/pantallaSesionModerador">Moderador</a>
+          <a href="/pantallaSesionAdministrador">Administrador</a>
+          <a href="/pantallaSesionEncargado">Encargado</a>
+        </section>
+
+        <div class="cajastexto">
+            <i class="fa-solid fa-user"></i>
+            <input type="text" id="usuario" name="usuario" placeholder="Nombre de usuario" autocomplete="off">
+        </div>
+        
+        <div class="cajastexto">
+            <i class="fa-solid fa-lock"></i>
+            <input type="password" id="contrasena" name="contrasena" placeholder="Contraseña" autocomplete="off">
+        </div>
+        <button type="submit">Iniciar sesión</button>
+        <a href="#">¿Olvidaste tu contraseña?</a>
+    </form>
+</div>
+    <div id="popup" class="popup">
+    <p>Rellena todos los campos del formulario.</p>
+  </div>
+</article>
+
+<%- include('partials/_footer')%>
+
+<script>
+    function validarFormulario() {
+      var usuario = document.getElementById('usuario').value;
+      var contrasena = document.getElementById('contrasena').value;
+  
+      if (usuario === '' || contrasena === '') {
+        alert('Por favor, rellena todos los campos');
+        return false; // Detiene el envío del formulario
+      }
+  
+      // Continuar con el envío del formulario si los campos están llenos
+      return true;
+    }
+  </script>

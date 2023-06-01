@@ -1,0 +1,88 @@
+<%- include('partials/_header') %>
+
+    <section id="navegacionmod">
+        <ul>
+            <h1>
+                <li>
+                    <a href="/pantallaModeracion">
+                        <img src="/images/v.svg" alt="logo">
+                    </a>
+                </li>
+                <li>
+                    <a href="/pantallaModeracion">
+                        Vialidolid<br>denuncias ciudadanas
+                    </a>
+                </li>
+            </h1>
+            <div class="botonesmod">
+                <li>
+                    <a href="#">Perfil</a>
+                </li>
+                <li>
+                    <a href="/pantallaMenuPrincipal">Cerrar Sesion</a>
+                </li>
+            </div>
+
+        </ul>
+    </section>
+
+
+    <section id="contenidogeneral">
+        <article>
+            <div class="barralateral">
+                <div class="botoneslateral">
+                    <h1>
+                        <span>
+                            <img src="/images/imagenperfil.svg">
+                            <p>Usuario: <%=session.usuario%>
+                            </p>
+                            <p>Rol: <%=session.cargo%>
+                            </p>
+                        </span>
+                    </h1>
+
+                    <a href="/pantallaReportesRevisados">
+                        Reportes En Atencion
+                    </a>
+
+                    <a href="/pantallaReportesEntrantes">
+                        Reportes entrantes
+                    </a>
+                </div>
+            </div>
+
+
+            <div class="contenido">
+                <container class="contenedorent">
+
+
+
+                    <%data.forEach(function(data) {%>
+
+                        <div id="desc">
+
+                            <form action="/eliminarreporte/<%= data.id_reporte %>" method="post">
+                                <input type="hidden" name="usermod" value="<%=session.id_empleado%>" />
+                                <input type="hidden" name="userrep" value="<%=data.nombre_ciudadano%>" />
+                                <input type="hidden" name="dependencia" value="<%=data.id_dependencia%>" />
+                                <textarea name="motivo" cols="50" rows="5" wrap="soft" required
+                                    placeholder="Introduzca el motivo"></textarea>
+
+                                <button type="submit" name="submit" class="button" id="sub">Aceptar</button>
+                            </form>
+                        </div>
+
+
+                        <% }); %>
+
+
+
+
+                </container>
+            </div>
+        </article>
+    </section>
+
+
+
+    <%- include('partials/_footer') %>

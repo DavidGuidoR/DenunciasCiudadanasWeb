@@ -1,0 +1,174 @@
+<!-- De esta manera incluimos el header desde el documento partials -->
+<%- include('partials/_header')%>
+<section id="navegacionmod">
+    <ul>
+        <h1>
+            <li>
+                <a href="/pantallaAdministracion">
+                <img src="/images/v.svg" alt="logo">
+                </a>
+            </li>
+            <li>
+                <a href="/pantallaAdministracion">
+                    Vialidolid<br>denuncias ciudadanas
+                </a>
+            </li>
+        </h1>
+        <div class="botonesmod">
+            <li>
+                <a href="/PantallaPerfilAdministrador/<%=session.id_empleado%>">Perfil</a>
+            </li>
+            <li>
+                <a href="/pantallaMenuPrincipal">Cerrar Sesion</a>
+            </li>
+        </div>
+
+    </ul>
+</section>
+
+
+<section id="contenidogeneral">
+    <article>
+        <div class="barralateral">
+        <div class="botoneslateral">
+     <h1>
+        <span>
+            <img src="/images/imagenperfil.svg">
+            <p>Usuario: <%=session.usuario%></p>
+            <p>Rol: <%=session.cargo%></p>
+        </span>
+    </h1>
+
+        <a href="/administracionEncargado_dependencias">
+            Encargados
+        </a>
+
+        <a href="/administracionEmpleados">
+            Moderadores
+        </a>
+        <a href="/administracionEmpleados">
+            Dependencias
+        </a>
+
+        <a href="/administracionCiudadanos">
+            Usuarios
+        </a>
+        <a href="administracionReportes">
+            Reportes
+        </a>
+    </div>
+    </div>
+    
+    <section class="contenedorderecho">
+    <div class="contenido">
+        <div class="contenidomoderacion">
+            <section class="insercion">
+                
+
+                <form action="/insert/ciudadano" method="post" onsubmit="return validarFormulario()">
+                    <h2>Registro</h2>
+                    <div class="cajastexto">
+                        <input type="text" id="nombre" name="nombre" placeholder="Nombre">
+                    </div>
+                    
+                    <div class="cajastexto">
+                        <input type="text" id="apellido_paterno" name="apellido_paterno" placeholder="Apellido Paterno">
+                    </div>
+
+                    <div class="cajastexto">
+                        <input type="text" id="apellido_materno" name="apellido_materno" placeholder="Apellido Materno">
+                    </div>
+
+                    <div class="cajastexto">
+                        <input type="text" id="correo" name="correo" placeholder="Correo">
+                    </div>
+
+                    <div class="cajastexto">
+                        <input type="text" id="contrasena" name="contrasena" placeholder="Contraseña">
+                    </div>
+
+                    <div class="cajastexto">
+                        <input type="text" id="telefono" name="telefono" placeholder="Teléfono">
+                    </div>
+
+                    <div class="cajastexto">
+                        <input type="text" id="estado" name="estado" placeholder="Estado">
+                    </div>
+
+                    <div class="cajastexto">
+                        <input type="text" id="ciudad" name="ciudad" placeholder="Ciudad">
+                    </div>
+
+                    <div class="cajastexto">
+                        <input type="text" id="n_penalizaciones" name="n_penalizaciones" value="0" readonly>
+                    </div>
+
+                    <button type="submit">Ingresar</button>
+                </form>
+
+            </section>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Apellido Paterno</th>
+                        <th>Apellido Materno</th>
+                        <th>Correo</th>
+                        <th>Teléfono</th>
+                        <th>Estado</th>
+                        <th>Ciudad</th>
+                        <th>Penalizaciones</th>
+                        <th>Editar</th>
+                        <th>Eliminar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <%data.forEach(function(data) {%>
+                    <tr>
+                        <td><%= data.id_ciudadano %></td>
+                        <td><%= data.nombre %></td>
+                        <td><%= data.apellido_paterno %></td>
+                        <td><%= data.apellido_materno %></td>
+                        <td><%= data.correo %></td>
+                        <td><%= data.telefono %></td>
+                        <td><%= data.estado %></td>
+                        <td><%= data.ciudad %></td>
+                        <td><%= data.n_penalizaciones %></td>
+                        <td><a href="/pantallaEdit/<%=data.id_ciudadano%>/ciudadano">Editar</a></td>
+                        <td><a href="/delete/<%=data.id_ciudadano%>/ciudadano">Eliminar</a></td>
+                    </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    </section>
+    </article>
+</section>
+
+
+
+<%- include('partials/_footer')%>
+<script>
+    function validarFormulario() {
+      var nombre= document.getElementById('nombre').value;
+      var apellidopaterno = document.getElementById('apellido_paterno').value;
+      var apellidmaterno = document.getElementById('apellido_materno').value
+      var correo = document.getElementById('correo').value;
+      var contrasena = document.getElementById('contrasena').value;
+      var telefono = document.getElementById('telefono').value;
+      var estado = document.getElementById('estado').value;
+      var ciudad = document.getElementById('ciudad').value;
+      var penalizaciones= document.getElementById('n_penalizaciones').value;
+  
+      if (nombre === '' || apellidopaterno === '' || apellidmaterno === '' || correo === '' || contrasena === '' || telefono === '' || estado === '' || ciudad === '' || penalizaciones === '') {
+        alert('Por favor, rellena todos los campos');
+        return false; // Detiene el envío del formulario
+      }
+  
+      // Continuar con el envío del formulario si los campos están llenos
+      return true;
+    }
+  </script>

@@ -1,0 +1,79 @@
+<!-- De esta manera incluimos el header desde el documento partials -->
+<%- include('partials/_header')%>
+<section id="navegacionmod">
+    <ul>
+        <h1>
+            <li>
+                <a href="/pantallaAdministracion">
+                <img src="/images/v.svg" alt="logo">
+                </a>
+            </li>
+            <li>
+                <a href="/pantallaAdministracion">
+                    Vialidolid<br>denuncias ciudadanas
+                </a>
+            </li>
+        </h1>
+        <div class="botonesmod">
+            <li>
+                <a href="/PantallaPerfilAdministrador/<%=session.id_empleado%>">Perfil</a>
+            </li>
+            <li>
+                <a href="/pantallaMenuPrincipal">Cerrar Sesion</a>
+            </li>
+        </div>
+
+    </ul>
+</section>
+
+
+<section id="contenidogeneral">
+    <article>
+        <div class="barralateral">
+        <div class="botoneslateral">
+     <h1>
+        <span>
+            <img src="/images/imagenperfil.svg">
+            <p>Usuario: <%=session.usuario%></p>
+            <p>Rol: <%=session.cargo%></p>
+        </span>
+    </h1>
+
+        <a href="/administracionEncargado_dependencias">
+            Encargados
+        </a>
+
+        <a href="/administracionEmpleados">
+            Moderadores
+        </a>
+        <a href="/administracionDependencias">
+            Dependencias
+        </a>
+
+        <a href="/administracionCiudadanos">
+            Usuarios
+        </a>
+        <a href="/administracionReportes">
+            Reportes
+        </a>
+    </div>
+    </div>
+    
+<section class="contenedorderecho">
+    <div class="contenido">
+        <div class="contenidomoderacion">
+
+            <section class="insercion">
+                
+
+                <form action="/edit/<%=tabla%>" method="post" >
+                    <h2>Registro</h2>
+                    <%- inputsHTML %>
+                    <button type="submit">Ingresar</button>
+                </form>
+            </section>
+        </div>
+    </div>
+    </section>
+    </article>
+</section>

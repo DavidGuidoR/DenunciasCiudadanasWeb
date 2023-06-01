@@ -1,0 +1,72 @@
+<%- include('partials/_header')%>
+<section id="navegacionmod">
+    <ul>
+        <h1>
+            <li>
+                <a href="/pantallaEncargado">
+                <img src="/images/v.svg" alt="logo">
+                </a>
+            </li>
+            <li>
+                <a href="/pantallaEncargado">
+                    Vialidolid<br>denuncias ciudadanas
+                </a>
+            </li>
+        </h1>
+        <div class="botonesmod">
+            <li>
+                <a href="/pantallaPerfilEncargado/<%=session.id_encargado%>">Perfil</a>
+            </li>
+            <li>
+                <a href="/pantallaMenuPrincipal">Cerrar Sesion</a>
+            </li>
+        </div>
+
+    </ul>
+</section>
+
+
+<section id="contenidogeneral">
+    <article>
+        <div class="barralateral">
+        <div class="botoneslateral">
+     <h1>
+        <span>
+            <img src="/images/imagenperfil.svg">
+            <p>Usuario: <%=session.usuario%></p>
+            <p>Rol: <%=session.cargo%></p>
+        </span>
+    </h1>
+
+        <a href="/pantallaReportesRevisadosEncargado?dependencia=<%=session.dependencia%>">
+            Reportes Solucionados
+        </a>
+
+        <a href="/pantallaReportesEntrantesEncargado?dependencia=<%=session.dependencia%>">
+            Reportes entrantes
+        </a>
+        <!-- <a href="/pantallaDescargarReportesEncargado?dependencia=<%=session.dependencia%>">
+            Descargar reportes
+        </a> -->
+    </div>
+    </div>
+    
+    <section class="contenedorderecho">
+    <div class="contenido">
+        <div class="contenidomoderacion">
+            <p>
+                Bienvenido al panel de encargado
+            </p>
+            <p>
+                Esta es la seccion del encargado, aquí podrá consultar los reportes entrantes, darles una revision y descargarlos en un formato de descarga para su consulta, 
+                ademas podrá marcar estos reportes como revisados para que los usuarios puedan saberlo.
+            </p>
+        </div>
+    </div>
+    </section>
+    </article>
+</section>
+
+
+
+<%- include('partials/_footer')%>

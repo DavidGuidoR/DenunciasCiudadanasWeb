@@ -1,0 +1,134 @@
+<!-- De esta manera incluimos el header desde el documento partials -->
+<%- include('partials/_header')%>
+<section id="navegacionmod">
+    <ul>
+        <h1>
+            <li>
+                <a href="/pantallaAdministracion">
+                <img src="/images/v.svg" alt="logo">
+                </a>
+            </li>
+            <li>
+                <a href="/pantallaAdministracion">
+                    Vialidolid<br>denuncias ciudadanas
+                </a>
+            </li>
+        </h1>
+        <div class="botonesmod">
+            <li>
+                <a href="/PantallaPerfilAdministrador/<%=session.id_empleado%>">Perfil</a>
+            </li>
+            <li>
+                <a href="/pantallaMenuPrincipal">Cerrar Sesion</a>
+            </li>
+        </div>
+
+    </ul>
+</section>
+
+
+<section id="contenidogeneral">
+    <article>
+        <div class="barralateral">
+        <div class="botoneslateral">
+     <h1>
+        <span>
+            <img src="/images/imagenperfil.svg">
+            <p>Usuario: <%=session.usuario%></p>
+            <p>Rol: <%=session.cargo%></p>
+        </span>
+    </h1>
+
+        <a href="/administracionEncargado_dependencias">
+            Encargados
+        </a>
+
+        <a href="/administracionEmpleados">
+            Moderadores
+        </a>
+        <a href="/administracionDependencias">
+            Dependencias
+        </a>
+
+        <a href="/administracionCiudadanos">
+            Usuarios
+        </a>
+        <a href="/administracionReportes">
+            Reportes
+        </a>
+    </div>
+    </div>
+    
+<section class="contenedorderecho">
+    <div class="contenido">
+        <div class="contenidomoderacion">
+
+            <section class="insercion">
+                
+
+                <form action="/insert/dependencia" method="post" onsubmit="return validarFormulario()">
+                    <h2>Registro</h2>
+                    <div class="cajastexto">
+                        <input type="text" id="nombre" name="nombre" placeholder="Nombre">
+                    </div>
+                    
+                    <div class="cajastexto">
+                        <input type="text" id="colonia" name="colonia" placeholder="Colonia">
+                    </div>
+
+                    <div class="cajastexto">
+                        <input type="text" id="calle" name="calle" placeholder="Calle">
+                    </div>
+                    <button type="submit">Ingresar</button>
+                </form>
+
+            </section>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Colonia</th>
+                        <th>Calle</th>
+                        <th>Editar</th>
+                        <!-- <th>Eliminar</th> -->
+                    </tr>
+                </thead>
+                <tbody>
+                    <%data.forEach(function(data) {%>
+                    <tr>
+                        <td><%= data.id_dependencia %></td>
+                        <td><%= data.nombre %></td>
+                        <td><%= data.colonia %></td>
+                        <td><%= data.calle %></td>
+                        <td><a href="/pantallaEdit/<%=data.id_dependencia%>/dependencia">Editar</a></td>
+                        <!-- <td><a href="/delete/<%=data.id_dependencia%>/dependencia">Eliminar</a></td> -->
+                    </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+    </article>
+</section>
+
+
+
+<%- include('partials/_footer')%>
+<script>
+    function validarFormulario() {
+      var nombre= document.getElementById('nombre').value;
+      var colonia = document.getElementById('colonia').value;
+      var calle = document.getElementById('calle').value;
+  
+      if (nombre === '' || colonia === '' || calle === '') {
+        alert('Por favor, rellena todos los campos');
+        return false; // Detiene el envío del formulario
+      }
+  
+      // Continuar con el envío del formulario si los campos están llenos
+      return true;
+    }
+  </script>

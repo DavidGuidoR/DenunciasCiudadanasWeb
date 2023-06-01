@@ -1,0 +1,34 @@
+<%- include('partials/_header')%>
+
+    <h2>Registro</h2>
+
+    <form action="/registro" method="post">
+
+        <label for="usuario">Cargo:</label>
+        <select id="opciones" name="cargo">
+            <option value="moderador">Moderador</option>
+            <option value="administrador">Administrador</option>
+        </select>
+
+        <label for="contraseña">Nombre:</label><br>
+        <input type="text" id="nombre" name="nombre"><br><br>
+
+        <label for="contraseña">Apellido paterno:</label><br>
+        <input type="text" id="ap_pat" name="apellido_paterno"><br><br>
+
+        <label for="contraseña">Apellido materno:</label><br>
+        <input type="text" id="ap_mat" name="apellido_materno"><br><br>
+
+        <label for="contraseña">Usuario:</label><br>
+        <input type="text" id="user" name="usuario"><br><br>
+
+        <label for="contraseña">Contraseña:</label><br>
+        <input type="password" id="password" name="contrasena"><br><br>
+
+
+        <button type="submit">Registrarse</button><br><br>
+
+        <button id="btnCerrarVentana" type="submit">Cerrar dialogo</button>
+    </form>
+
+    <%- include('partials/_footer')%>

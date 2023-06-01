@@ -1,0 +1,82 @@
+<!-- De esta manera incluimos el header desde el documento partials -->
+<%- include('partials/_header')%>
+<section id="navegacionmod">
+    <ul>
+        <h1>
+            <li>
+                <a href="/pantallaAdministracion">
+                <img src="/images/v.svg" alt="logo">
+                </a>
+            </li>
+            <li>
+                <a href="/pantallaAdministracion">
+                    Vialidolid<br>denuncias ciudadanas
+                </a>
+            </li>
+        </h1>
+        <div class="botonesmod">
+            <li>
+                <a href="/Perfil">Perfil</a>
+            </li>
+            <li>
+                <a href="/pantallaMenuPrincipal">Cerrar Sesion</a>
+            </li>
+        </div>
+
+    </ul>
+</section>
+
+
+<section id="contenidogeneral">
+    <article>
+        <div class="barralateral">
+        <div class="botoneslateral">
+     <h1>
+        <span>
+            <img src="/images/imagenperfil.svg">
+            <p>Usuario: <%=session.usuario%></p>
+            <p>Rol: <%=session.cargo%></p>
+        </span>
+    </h1>
+
+        <a href="/administracionEncargados">
+            Encargados
+        </a>
+
+        <a href="/administracionModeradores">
+            Moderadores
+        </a>
+        <a href="/administracionDependencias">
+            Dependencias
+        </a>
+
+        <a href="/administracionUsuarios">
+            Usuarios
+        </a>
+        <a href="administracionReportes">
+            Reportes
+        </a>
+    </div>
+    </div>
+    
+    <section class="contenedorderecho">
+    <div class="contenido">
+        <div class="contenidomoderacion">
+            <p>
+                Bienvenido al panel de administración
+            </p>
+            <p>
+                Esta es la seccion del administrador, desde aquí podrá consultar, revisar y modificar los encargados de la dependencia, moderadores, dependencia, usuarios y reportes.
+            </p>
+            <p>
+                Agradecemos mucho su colaboración.
+            </p>
+        </div>
+    </div>
+    </section>
+    </article>
+</section>
+
+
+
+<%- include('partials/_footer')%>

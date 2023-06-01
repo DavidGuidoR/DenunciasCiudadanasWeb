@@ -1,0 +1,76 @@
+<%- include('partials/_header')%>
+<section id="navegacionmod">
+    <ul>
+        <h1>
+            <li>
+                <a href="/pantallaEncargado">
+                <img src="/images/v.svg" alt="logo">
+                </a>
+            </li>
+            <li>
+                <a href="/pantallaEncargado">
+                    Vialidolid<br>denuncias ciudadanas
+                </a>
+            </li>
+        </h1>
+        <div class="botonesmod">
+            <li>
+                <a href="#">Perfil</a>
+            </li>
+            <li>
+                <a href="/pantallaMenuPrincipal">Cerrar Sesion</a>
+            </li>
+        </div>
+
+    </ul>
+</section>
+
+
+<section id="contenidogeneral">
+    <article>
+        <div class="barralateral">
+        <div class="botoneslateral">
+     <h1>
+        <span>
+            <img src="/images/imagenperfil.svg">
+            <p>Usuario: <%=session.usuario%></p>
+            <p>Rol: <%=session.cargo%></p>
+        </span>
+    </h1>
+    <a href="#">
+        Reportes Solucionados
+    </a>
+
+    <a href="#">
+        Reportes entrantes
+    </a>
+    <!-- <a href="/pantallaDescargarReportesEncargado?dependencia=<%=session.dependencia%>">
+        Descargar reportes
+    </a> -->
+    </div>
+    </div>
+    
+    <section class="contenedorderecho">
+        <div class="contenido">
+            <container class="contenedorent">
+                    
+                    <div id="desc">
+                        <h2>Por favor adjunte evidencia del reporte solucionado</h2>
+                        <img src="http://137.117.123.255/reportes_img/orca-plush.jpg">
+                        <form action="/pruebasubirimagen" method="post" enctype="multipart/form-data">
+                            <input type="file" name="imagen">
+                            <button type="submit" name="submit" class="button" id="sub">Aceptar</button>
+                        </form>
+                            
+                    </div>
+                
+            
+        </container>
+        </div>
+    </section>
+    </article>
+</section>
+
+
+
+<%- include('partials/_footer')%>

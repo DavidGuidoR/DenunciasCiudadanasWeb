@@ -1,0 +1,155 @@
+<%- include('partials/_header') %>
+
+    <section id="navegacionmod">
+        <ul>
+            <h1>
+                <li>
+                    <a href="/pantallaModeracion">
+                        <img src="/images/v.svg" alt="logo">
+                    </a>
+                </li>
+                <li>
+                    <a href="/pantallaModeracion">
+                        Vialidolid<br>denuncias ciudadanas
+                    </a>
+                </li>
+            </h1>
+            <div class="botonesmod">
+                <li>
+                    <a href="/pantallaPerfilModerador/<%=session.id_empleado%>">Perfil</a>
+                </li>
+                <li>
+                    <a href="/pantallaMenuPrincipal">Cerrar Sesion</a>
+                </li>
+            </div>
+
+        </ul>
+    </section>
+
+
+    <section id="contenidogeneral">
+        <article>
+            <div class="barralateral">
+                <div class="botoneslateral">
+                    <h1>
+                        <span>
+                            <img src="/images/imagenperfil.svg">
+                            <p>Usuario: <%=session.usuario%>
+                            </p>
+                            <p>Rol: <%=session.cargo%>
+                            </p>
+                        </span>
+                    </h1>
+
+                    <a href="/pantallaReportesRevisados">
+                        Reportes En Atencion
+                    </a>
+
+                    <a href="/pantallaReportesEntrantes">
+                        Reportes entrantes
+                    </a>
+                </div>
+            </div>
+
+
+            <div class="contenido">
+                <container class="contenedorent" id="reportesvis">
+
+
+                    <div id="allreportes">
+
+                        <%data.forEach(function(data) {%>
+
+                            <div id="desc">
+                                <div id="desc-titulo">
+                                    <h3>Descripcion</h3>
+                                    <h1>
+                                        <%= data.descripcion%>
+                                    </h1>
+                                </div>
+                                <div class="wrapper" id="descrip">
+                                    <div class="box1">
+                                        <img src="/images/v.svg" height="100px" width="100px">
+                                    </div>
+                                    <div>
+                                        <h3>ID del Reporte</h3>
+                                        <%= data.id_reporte%>
+                                    </div>
+                                    <div>
+                                        <h3>Fecha</h3>
+                                        <%= formatDate(data.fecha)%>
+                                    </div>
+                                    <div>
+                                        <h3>Latitud y Longitud</h3>
+                                        <%= data.latitud + ', ' + data.longitud%>
+                                    </div>
+                                    <div>
+                                        <h3>Tipo de Reporte</h3>
+                                        <%= data.tipo_reporte%>
+                                    </div>
+                                    <div>
+                                        <h3># de Apoyos</h3>
+                                        <%= data.n_apoyos%>
+                                    </div>
+
+                                    <div>
+                                        <h3>Estatus</h3>
+                                        <%= data.estatus%>
+                                    </div>
+                                    <div>
+                                        <h3># de Denuncias</h3>
+                                        <%= data.n_denuncias%>
+                                    </div>
+                                    <div>
+                                        <h3>Referencias</h3>
+                                        <%= data.referencias%>
+                                    </div>
+                                    <div>
+                                        <h3>ID del ciudadano</h3>
+                                        <%= data.nombre_ciudadano%>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <section id="navegacionmod1">
+                                <ul>
+
+                                    <div class="botonesmod">
+
+                                        <li>
+
+                                            <a href="/penalizar/<%= data.id_reporte %>"><button id="sub">Penalizar
+                                                    Reporte</button></a>
+                                        </li>
+                                        <li>
+
+                                            <a href="/eliminar/<%= data.id_reporte %>"><button id="sub">Eliminar
+                                                    Reporte</button></a>
+                                        </li>
+                                        <li>
+                                            <% if(data.estatus=='pendiente' ){%>
+                                                <form action="/cambiarestatus/<%= data.id_reporte %>" method="post">
+                                                    <input type="hidden" name="estatuscb" value="En_Atencion" />
+                                                    <button type="submit" name="submit" id="sub">Atender
+                                                        Reporte</button>
+                                                </form>
+                                                <% } %>
+                                        </li>
+                                    </div>
+
+                                </ul>
+                            </section>
+                            <% }); %>
+
+                    </div>
+
+
+                </container>
+            </div>
+        </article>
+    </section>
+
+
+
+    <%- include('partials/_footer') %>

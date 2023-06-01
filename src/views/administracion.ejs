@@ -1,0 +1,80 @@
+<%- include('partials/_header')%>
+<section id="navegacionmod">
+    <ul>
+        <h1>
+            <li>
+                <a href="/pantallaAdministracion">
+                <img src="/images/v.svg" alt="logo">
+                </a>
+            </li>
+            <li>
+                <a href="/pantallaAdministracion">
+                    Vialidolid<br>denuncias ciudadanas
+                </a>
+            </li>
+        </h1>
+        <div class="botonesmod">
+            <li>
+                <a href="/PantallaPerfilAdministrador/<%=session.id_empleado%>">Perfil</a>
+            </li>
+            <li>
+                <a href="/pantallaMenuPrincipal">Cerrar Sesion</a>
+            </li>
+        </div>
+
+    </ul>
+</section>
+
+
+<section id="contenidogeneral">
+    <article>
+        <div class="barralateral">
+        <div class="botoneslateral">
+     <h1>
+        <span>
+            <img src="/images/imagenperfil.svg">
+            <p>Usuario: <%=session.usuario%></p>
+            <p>Rol: <%=session.cargo%></p>
+        </span>
+    </h1>
+
+        <a href="/administracionEncargado_dependencias">
+            Encargados
+        </a>
+
+        <a href="/administracionEmpleados">
+            Moderadores
+        </a>
+        <a href="/administracionDependencias">
+            Dependencias
+        </a>
+
+        <a href="/administracionCiudadanos">
+            Usuarios
+        </a>
+        <a href="administracionReportes">
+            Reportes
+        </a>
+    </div>
+    </div>
+    
+
+    <div class="contenido">
+        <div class="contenidomoderacion">
+            <p>
+                Bienvenido al panel de administración
+            </p>
+            <p>
+                Esta es la seccion del administrador, desde aquí podrá consultar, revisar y modificar los encargados de la dependencia, moderadores, dependencia, usuarios y reportes.
+            </p>
+            <p>
+                Agradecemos mucho su colaboración.
+            </p>
+        </div>
+    </div>
+    </article>
+</section>
+
+
+
+<%- include('partials/_footer')%>

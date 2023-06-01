@@ -1,0 +1,112 @@
+<!-- De esta manera incluimos el header desde el documento partials -->
+<%- include('partials/_header')%>
+<section id="navegacionmod">
+    <ul>
+        <h1>
+            <li>
+                <a href="/pantallaAdministracion">
+                <img src="/images/v.svg" alt="logo">
+                </a>
+            </li>
+            <li>
+                <a href="/pantallaAdministracion">
+                    Vialidolid<br>denuncias ciudadanas
+                </a>
+            </li>
+        </h1>
+        <div class="botonesmod">
+            <li>
+                <a href="/PantallaPerfilAdministrador/<%=session.id_empleado%>">Perfil</a>
+            </li>
+            <li>
+                <a href="/pantallaMenuPrincipal">Cerrar Sesion</a>
+            </li>
+        </div>
+
+    </ul>
+</section>
+
+
+<section id="contenidogeneral">
+    <article>
+        <div class="barralateral">
+        <div class="botoneslateral">
+     <h1>
+        <span>
+            <img src="/images/imagenperfil.svg">
+            <p>Usuario: <%=session.usuario%></p>
+            <p>Rol: <%=session.cargo%></p>
+        </span>
+    </h1>
+
+        <a href="/administracionEncargado_dependencias">
+            Encargados
+        </a>
+
+        <a href="/administracionEmpleados">
+            Moderadores
+        </a>
+        <a href="/administracionDependencias">
+            Dependencias
+        </a>
+
+        <a href="/administracionCiudadanos">
+            Usuarios
+        </a>
+        <a href="administracionReportes">
+            Reportes
+        </a>
+    </div>
+    </div>
+    
+    <section class="contenedorderecho">
+    <div class="contenido">
+        <div class="contenidomoderacion">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>fecha</th>
+                        <th>Descripcion</th>
+                        <th>Latitud</th>
+                        <th>Longitud</th>
+                        <th>Apoyos</th>
+                        <th>Estatus</th>
+                        <th>N denuncias</th>
+                        <th>Referencias</th>
+                        <th>ID ciudadano</th>
+                        <th>Tipo reporte</th>
+                        <th>ID dependencia</th>
+                        <!-- <th>Revision</th> -->
+                    </tr>
+                </thead>
+                <tbody>
+                    <%data.forEach(function(data) {%>
+                    <tr>
+                        <td><%= data.id_reporte %></td>
+                        <td><%= formatDate(data.fecha)%></td>
+                        <td><%= data.descripcion %></td>
+                        <td><%= data.latitud%></td>
+                        <td><%= data.longitud %></td>
+                        <td><%= data.n_apoyos %></td>
+                        <td><%= data.estatus %></td>
+                        <td><%= data.n_denuncias %></td>
+                        <td><%= data.referencias%></td>
+                        <td><%= data.nombre_ciudadano%></td>
+                        <td><%= data.tipo_reporte%></td>
+                        <td><%= data.nombre_dependencia%></td>
+                        
+                        <!-- <td><a href=/revisionreportes>Revisar</a></td> -->
+                    </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+    </article>
+</section>
+
+
+
+<%- include('partials/_footer')%>
