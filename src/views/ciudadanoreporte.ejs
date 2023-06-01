@@ -51,13 +51,28 @@
     <section class="contenedorderecho">
     <div class="contenido">
         <div class="contenidomoderacion">
-            <p>
-                Bienvenido al panel del ciudadano
-            </p>
-            <p>
-                Sea bienvenido estimado usuario, en esta seccion podrá realizar denuncias acerca de problemas en su localidad, podra consultar sus reportes realizados y realizar reportes en el panel izquierdo.
-                Agradecemos su cooperación por una mejor sociedad.
-            </p>
+            <form action="/reporte" method="post"></form>
+            <input type="text" name="id_reporte" placeholder="ID del reporte" required>
+  <br>
+  <input type="date" name="fecha" placeholder="Fecha" required>
+  <br>
+  <textarea name="descripcion" placeholder="Descripción" required></textarea>
+  <br>
+  <input type="number" name="n_apoyos" placeholder="Número de apoyos" required>
+  <br>
+  <input type="text" name="estatus" placeholder="Estatus" required>
+  <br>
+  <input type="number" name="n_denuncias" placeholder="Número de denuncias" required>
+  <br>
+  <input type="text" name="referencias" placeholder="Referencias" required>
+  <br>
+  <input type="text" name="id_ciudadano" placeholder="ID del ciudadano" required>
+  <br>
+  <input type="text" name="tipo_reporte" placeholder="Tipo de reporte" required>
+  <br>
+  <input type="text" name="id_dependencia" placeholder="ID de la dependencia" required>
+  <br>
+  <input type="submit" value="Guardar">
         </div>
     </div>
     </section>
