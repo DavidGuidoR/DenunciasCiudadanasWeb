@@ -13,6 +13,10 @@ controller.render = (req, res) => {
     res.render('menuPrincipal');
 }
 
+controller.pantallaRegistro = (req, res) => {
+    res.render('Registro');
+}
+
 controller.pantallaSesion = (req, res) => {
     res.render('inicioSesion');
 }
@@ -27,6 +31,10 @@ controller.pantallaSesionAdministrador = (req, res) => {
 
 controller.pantallaSesionEncargado = (req, res) => {
     res.render('iniciosesionencargado');
+}
+
+controller.pantallaSesionCiudadano = (req, res) => {
+    res.render('iniciosesionciudadano');
 }
 
 controller.pantallaMenuPrincipal = (req, res) => {
@@ -62,19 +70,46 @@ controller.pruebapantsubirimagen = (req,res) => {
 }
 
 
+//registro de usuarios
+controller.registro = (req,res) =>{
+    const ciudadano = req.body; // Suponiendo que el objeto JSON contiene todos los campos del post
+    console.log(ciudadano)
+  const query = 'INSERT INTO ciudadano SET ?';
+  req.getConnection((err, conn) => {
+  conn.query(query, ciudadano, (err, data) => {
+    if (err) {
+      console.error('Error al insertar el post en la base de datos: ', err);
+      res.status(500).json({ error: 'Error al registrar el post' });
+    } else {
+      console.log('Post registrado correctamente');
+      res.render('menuPrincipal');
+    }
+  });
+});
+}
+
 // Inicio de sesion dinamico-------------------------------------------------------------------------------------------------------------
 controller.inicioSesion = (req, res) => {
     // Obtenemos el usuario y la contraseña del cuerpo de la solicitud
-    console.log(req.body['contrasena']);
-    const usuario = req.body['usuario'];
-    const contrasena = req.body['contrasena'];
     const tabla = req.params.tabla;
+    var telefono='';
+    var usuario ='';
+     if(tabla=='ciudadano'){
+        telefono = req.body['telefono'];
+        console.log(telefono);
+     } else{
+        usuario = req.body['usuario'];
+     }
     const rol= req.params.rol;
+    const contrasena = req.body['contrasena'];
     var consulta = '';
     if (tabla == "empleado") {
-        consulta = 'SELECT usuario, contrasena, cargo, id_empleado FROM empleado WHERE usuario=?'
-    } else {
+        consulta = 'SELECT usuario, contrasena, cargo, id_empleado FROM empleado WHERE usuario=?';
+    } else if(tabla=="encargado_dependencia"){
         consulta = 'SELECT ed.usuario, ed.contrasena, d.id_dependencia, d.nombre, ed.id_encargado FROM encargado_dependencia ed JOIN dependencia d ON ed.id_dependencia = d.id_dependencia WHERE ed.usuario = ?';
+    } else { 
+        consulta ='SELECT * FROM ciudadano WHERE telefono=?';
+        
     }
     // Establecemos la conexión con la base de datos
     req.getConnection((err, conn) => {
@@ -132,7 +167,7 @@ controller.inicioSesion = (req, res) => {
                 }
             });
         }
-        else {
+        else if (tabla =='encargado_dependencia'){
             conn.query(consulta, usuario, (err, empleado) => {
                 // Verificamos si se produjo un error en la consulta
                 if (err) {
@@ -180,6 +215,51 @@ controller.inicioSesion = (req, res) => {
                 }
             });
         }
+            else{
+            conn.query(consulta, telefono, (err, ciudadano) => {
+                // Verificamos si se produjo un error en la consulta
+                if (err) {
+                    res.send('Error en la consulta');
+                    console.log(err);
+                } else {
+                    // Verificamos si se encontró un empleado con el usuario proporcionado
+                    if (ciudadano.length > 0) {
+                        // Extraemos los datos de la consulta
+                        const telefonoConsulta = ciudadano[0].telefono;
+                        const contrasenaConsulta = ciudadano[0].contrasena;
+                        const correo = ciudadano[0].correo;
+                        const id_ciudadano = ciudadano[0].id_ciudadano;
+                        // Comparamos el usuario y la contraseña con los datos de la consulta
+                        if (telefono == telefonoConsulta && contrasena == contrasenaConsulta) {
+                            // Redirigimos a la página correspondiente según el cargo
+                            req.session.telefono = telefono;
+                            req.session.correo = correo;
+                            req.session.id_ciudadano = id_ciudadano;
+                            res.render('ciudadano');
+
+                        } else {
+                            const mensajeError = 'Inicio de sesión fallido. Por favor, verifique sus credenciales.';
+                            const script = `
+                            <script>
+                                alert('${mensajeError}');
+                                window.location.href = "/pantallaSesion${rol}"; // Redirigir a la página de inicio de sesión
+                            </script>
+                                `;
+                            res.send(script);
+                        }
+                    } else {
+                        const mensajeError = 'No se encuentra una cuenta relacionada con el telefono. Por favor, verifique sus credenciales.';
+                        const script = `
+                        <script>
+                          alert('${mensajeError}');
+                          window.location.href = "/pantallaSesion${rol}"; // Redirigir a la página de inicio de sesión
+                        </script>
+                      `;
+                        res.send(script);
+                    }
+                }
+            });
+            }
     });
 };
 
@@ -1159,6 +1239,35 @@ controller.pruebasubirimagen = (req,res) =>{
   } else {
     res.status(400).send('No se recibió ninguna imagen');
   }
+}
+
+// MODULOS DEL CIUDADANO ------------------------------------------------------------------------
+controller.pantallaCiudadano = (req,res) =>{
+    res.render('ciudadano');
+}
+
+controller.pantallaPerfilCiudadano = (req,res) =>{
+    const id_ciudadano=req.params.id_ciudadano;
+    const consulta = 'SELECT * FROM ciudadano WHERE id_ciudadano = ?';
+    req.getConnection((err,conn) =>{
+        conn.query(consulta,[id_ciudadano],(err,data) =>{
+            if(err){
+                res.json(err);
+            } else {
+                res.render('ciudadanoperfil', {data:data})
+            }
+        })
+    });
+}
+
+controller.formReporte = (req,res) => {
+    console.log(req.body.tabla);
+    const tabla = req.body.tabla;
+    res.render('ciudadanoreporte', {tabla});
+}
+
+controller.pantallaReporteCiudadano = (req,res) =>{
+    res.render('ciudadanotiporeporte');   
 }
 
 module.exports = controller;

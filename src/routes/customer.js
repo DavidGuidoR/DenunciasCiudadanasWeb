@@ -14,12 +14,17 @@ const customerController = require('../controllers/customerController');
 router.get('/', customerController.render);
 router.get('/pantallaMenuPrincipal',customerController.pantallaMenuPrincipal);
 
+//Rutas del Registro
+router.get('/pantallaRegistro',customerController.pantallaRegistro);
+router.post('/registro',customerController.registro);
+
 // Rutas del Inicio de Sesion
 router.get('/plantillaInicioSesion',customerController.plantillaInicioSesion);
 router.get('/pantallaSesion',customerController.pantallaSesion);
 router.get('/pantallaSesionModerador',customerController.pantallaSesionModerador);
 router.get('/pantallaSesionAdministrador',customerController.pantallaSesionAdministrador);
 router.get('/pantallaSesionEncargado',customerController.pantallaSesionEncargado);
+router.get('/pantallaSesionCiudadano',customerController.pantallaSesionCiudadano);
 router.post('/inicioSesion/:tabla/:rol', customerController.inicioSesion);
 
 
@@ -65,6 +70,12 @@ router.get('/reportesSolucionadoEncargado',customerController.descargarReportesE
 router.get('/solucionarReportesEncargado/:id_tabla/:id_reporte/:id_encargado',customerController.solucionarReportesEncargado);
 router.post('/cambiarEstatusReportesSolucionado',customerController.cambiarEstatusReportesSolucionado);
 
+//rutas del ciudadano
+router.get('/pantallaCiudadano',customerController.pantallaCiudadano);
+router.get('/pantallaPerfilCiudadano/:id_ciudadano',customerController.pantallaPerfilCiudadano);
+router.get('/pantallaReporteCiudadano',customerController.pantallaReporteCiudadano);
+router.post('/formReporte',customerController.formReporte);
+
 // Rutas de penalizacion
 router.post('/penalizarreporte/:id_reporte', customerController.penalizarreporte);
 router.get('/penalizar/:id_reporte',customerController.penalizar);
@@ -74,6 +85,7 @@ router.get('/penalizar/:id_reporte',customerController.penalizar);
 router.post('/eliminarreporte/:id_reporte', customerController.eliminarreporte);
 router.get('/eliminar/:id_reporte',customerController.eliminar);
 router.get('/pruebapantsubirimagen',customerController.pruebapantsubirimagen);
+
 // Ruta de prueba para subir imagen
 router.post('/pruebasubirimagen', customerController.pruebasubirimagen);
 

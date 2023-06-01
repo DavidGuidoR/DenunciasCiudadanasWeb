@@ -1,0 +1,98 @@
+<%- include('partials/_header')%>
+<section id="navegacionmod">
+    <ul>
+        <h1>
+            <li>
+                <a href="/pantallaCiudadano">
+                <img src="/images/v.svg" alt="logo">
+                </a>
+            </li>
+            <li>
+                <a href="/pantallaCiudadano">
+                    Vialidolid<br>denuncias ciudadanas
+                </a>
+            </li>
+        </h1>
+        <div class="botonesmod">
+            <li>
+                <a href="/pantallaPerfilCiudadano/<%=session.id_ciudadano%>">Perfil</a>
+            </li>
+            <li>
+                <a href="/pantallaMenuPrincipal">Cerrar Sesion</a>
+            </li>
+        </div>
+
+    </ul>
+</section>
+
+
+<section id="contenidogeneral">
+    <article>
+        <div class="barralateral">
+        <div class="botoneslateral">
+     <h1>
+        <span>
+            <img src="/images/imagenperfil.svg">
+            <p>Telefono: <%=session.telefono%></p>
+            <p><%=session.correo%></p>
+        </span>
+    </h1>
+
+        <a href="#">
+            Realizar reporte
+        </a>
+
+        <a href="#">
+            Reportes realizados
+        </a>
+    </div>
+    </div>
+    
+    <section class="contenedorderecho">
+    <div class="contenido">
+        <div class="contenidomoderacion">
+            <div id="descEnc">
+                <%data.forEach(function(data) {%>
+                <div class="wrapperEnc">
+                    <div>
+                        <img src="/images/v.svg" height="100px" width="100px">
+                    </div>
+                    <div>
+                        <h3>Nombre</h3>
+                        <p><%=data.nombre%></p>
+                    </div>
+                    <div>
+                        <h3>Apellidos</h3>
+                        <p><%=data.apellido_paterno+' '+data.apellido_materno%></p>
+                    </div>
+                    <div>
+                        <h3>Correo</h3>
+                        <p><%=data.correo%></p>
+                    </div>
+                    <div>
+                        <h3>Contraseña</h3>
+                        <p><%=data.contrasena%></p>
+                    </div>
+                    <div>
+                        <h3>Teléfono</h3>
+                        <p><%=data.telefono%></p>
+                    </div>
+                    <div>
+                        <h3>Estado</h3>
+                        <p><%=data.estado%></p>
+                    </div>
+                    <div>
+                        <h3>Ciudad</h3>
+                        <p><%=data.ciudad%></p>
+                    </div>
+                </div>
+            </div>
+            <% }); %>
+    </div>
+    </section>
+    </article>
+</section>
+
+
+
+<%- include('partials/_footer')%>

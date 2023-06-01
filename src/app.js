@@ -50,9 +50,9 @@ app.get('/imagen/:formato/:base64', (req, res) => {
 //middlewares: Funciones se ejecutan entre la recepcion de una solicitud y el envió de una respuesta basicamente es un intermediario entre el cliente y el servidor
 app.use(morgan('dev'))  //mostrar mensajes por consola con dev
 app.use(myConnection(mysql,{
-    host:'137.117.123.255',
+    host:'localhost',
     user: 'root',
-    password: '12345678A',
+    password: '',
     port: 3306,
     database: 'vialidolid',
     connectTimeout: 3600000,

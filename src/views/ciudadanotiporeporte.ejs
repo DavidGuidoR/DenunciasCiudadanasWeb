@@ -1,0 +1,73 @@
+<%- include('partials/_header')%>
+<section id="navegacionmod">
+    <ul>
+        <h1>
+            <li>
+                <a href="/pantallaCiudadano">
+                <img src="/images/v.svg" alt="logo">
+                </a>
+            </li>
+            <li>
+                <a href="/pantallaCiudadano">
+                    Vialidolid<br>denuncias ciudadanas
+                </a>
+            </li>
+        </h1>
+        <div class="botonesmod">
+            <li>
+                <a href="/pantallaPerfilCiudadano/<%=session.id_ciudadano%>">Perfil</a>
+            </li>
+            <li>
+                <a href="/pantallaMenuPrincipal">Cerrar Sesion</a>
+            </li>
+        </div>
+
+    </ul>
+</section>
+
+
+<section id="contenidogeneral">
+    <article>
+        <div class="barralateral">
+        <div class="botoneslateral">
+     <h1>
+        <span>
+            <img src="/images/imagenperfil.svg">
+            <p>Telefono: <%=session.telefono%></p>
+            <p> <%=session.correo%></p>
+        </span>
+    </h1>
+
+        <a href="/pantallaReporteCiudadano">
+            Realizar reporte
+        </a>
+
+        <a href="/pantallaReporteRealizadoCiudadano">
+            Reportes realizados
+        </a>
+    </div>
+    </div>
+    
+    <section class="contenedorderecho">
+    <div class="contenido">
+        <div class="contenidomoderacion">
+            <form action="/formReporte">
+                <select id="tabla" name="tabla">
+                    <option value="reporte_ooapas">Suministro de agua</option>
+                    <option value="reporte_m_animal">Maltrato animal</option>
+                    <option value="reporte_vial">Problemas en vialidades</option>
+                    <option value="reporte_alumbrado_publico">Alumbrado publico</option>
+                    <option value="reporte_bacheo">Baches y defectos en carretera</option>
+                </select>
+            <button type="submit" class="botonreporte">Aceptar</button>
+            </form>
+            <a href="/pantallaCiudadano" class="botonreporte"></a>
+        </div>
+    </div>
+    </section>
+    </article>
+</section>
+
+
+
+<%- include('partials/_footer')%>

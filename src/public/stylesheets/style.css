@@ -1602,4 +1602,77 @@ h3 {
     background-color: var(--negro);
 }
 
+/* Estilo CSS del registro*/
+#registro {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle, rgba(63, 94, 251, 1) 0%, rgba(123, 76, 164, 1) 100%);
+    height: 100vh;
+    width: 100%;
+}
+
+#contenedorregistro {
+    width: 60%;
+    height: 60vh;
+    background-color: var(--Morado);
+    padding: 1rem;
+    border-radius: 1rem;
+    border: 3px solid var(--negro);
+    align-content: center;
+    justify-content: center;
+}
+
+#contenedorregistro h2{
+    
+}
+
+#contenedorregistro form{
+    width: 100%;
+    height: 80%;
+    display: grid;
+    justify-self: center;
+    align-self: center;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr ;
+}
+
+#contenedorregistro div{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    padding: 1rem;
+}
+
+#contenedorregistro div label{
+    width: 50%;
+    display: flex;
+    justify-content: flex-end;
+    align-content: center;
+    padding: 0.1rem;
+}
+
+#contenedorregistro input{
+    width: 50%;
+    border: 1px solid var(--negro);
+    border-radius: 0.2;
+    padding: 0.5rem;
+}
+
+#contenedorregistro form button{
+    background-color: var(--NegroBotones);
+    border-radius: 1rem;
+    border: 3px solid var(--negro);
+    color: var(--blanco);
+    width: 50%;
+    height: 50%;
+    cursor: pointer;
+}
+
+#contenedorregistro form button:hover{
+    background-color: var(--negro);
+    
+}
+
+
 }
