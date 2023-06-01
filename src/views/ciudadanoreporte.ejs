@@ -1,0 +1,84 @@
+<%- include('partials/_header')%>
+<section id="navegacionmod">
+    <ul>
+        <h1>
+            <li>
+                <a href="/pantallaCiudadano">
+                <img src="/images/v.svg" alt="logo">
+                </a>
+            </li>
+            <li>
+                <a href="/pantallaCiudadano">
+                    Vialidolid<br>denuncias ciudadanas
+                </a>
+            </li>
+        </h1>
+        <div class="botonesmod">
+            <li>
+                <a href="/pantallaPerfilCiudadano/<%=session.id_ciudadano%>">Perfil</a>
+            </li>
+            <li>
+                <a href="/pantallaMenuPrincipal">Cerrar Sesion</a>
+            </li>
+        </div>
+
+    </ul>
+</section>
+
+
+<section id="contenidogeneral">
+    <article>
+        <div class="barralateral">
+        <div class="botoneslateral">
+     <h1>
+        <span>
+            <img src="/images/imagenperfil.svg">
+            <p>Telefono: <%=session.telefono%></p>
+            <p> <%=session.correo%></p>
+        </span>
+    </h1>
+
+        <a href="/pantallaReporteCiudadano">
+            Realizar reporte
+        </a>
+
+        <a href="/pantallaReporteRealizadoCiudadano">
+            Reportes realizados
+        </a>
+    </div>
+    </div>
+    
+    <section class="contenedorderecho">
+    <div class="contenido">
+        <div class="contenidomoderacion">
+            <form action="/reporte" method="post"></form>
+            <input type="text" name="id_reporte" placeholder="ID del reporte" required>
+  <br>
+  <input type="date" name="fecha" placeholder="Fecha" required>
+  <br>
+  <textarea name="descripcion" placeholder="Descripción" required></textarea>
+  <br>
+  <input type="number" name="n_apoyos" placeholder="Número de apoyos" required>
+  <br>
+  <input type="text" name="estatus" placeholder="Estatus" required>
+  <br>
+  <input type="number" name="n_denuncias" placeholder="Número de denuncias" required>
+  <br>
+  <input type="text" name="referencias" placeholder="Referencias" required>
+  <br>
+  <input type="text" name="id_ciudadano" placeholder="ID del ciudadano" required>
+  <br>
+  <input type="text" name="tipo_reporte" placeholder="Tipo de reporte" required>
+  <br>
+  <input type="text" name="id_dependencia" placeholder="ID de la dependencia" required>
+  <br>
+  <input type="submit" value="Guardar">
+        </div>
+    </div>
+    </section>
+    </article>
+</section>
+
+
+
+<%- include('partials/_footer')%>

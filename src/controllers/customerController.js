@@ -1263,6 +1263,46 @@ controller.pantallaPerfilCiudadano = (req,res) =>{
 controller.formReporte = (req,res) => {
     console.log(req.body.tabla);
     const tabla = req.body.tabla;
+    let inputsHTML = '';
+                switch (dependencia) {
+                
+
+                case '1':
+                    inputsHTML += '<div><h3>Clave de predio:</h3><p>' + data[0].cve_predio + '</p></div>';
+                    inputsHTML += '<div><h3>Colonia</h3><p>' + data[0].colonia + '</p></div>';
+                    inputsHTML += '<div><h3>Calle</h3><p>' + data[0].calle + '</p></div>';
+
+                    break;
+
+                case '2':
+                    inputsHTML += '<div><h3>Tipo de mascota:</h3><p>' + data[0].tipo_mascota + '</p></div>';
+                    inputsHTML += '<div><h3>Colonia</h3><p>' + data[0].colonia + '</p></div>';
+                    inputsHTML += '<div><h3>Calle</h3><p>' + data[0].calle + '</p></div>';
+
+                    break;
+
+                case '3':
+                    inputsHTML += '<div><img src=' + data[0].imagen+ ' width=300px height=300px></div>';
+                    inputsHTML += '<div><h3>Colonia</h3><p>' + data[0].colonia + '</p></div>';
+                    inputsHTML += '<div><h3>Calle</h3><p>' + data[0].calle + '</p></div>';
+                    break;
+
+                case '4':
+                    inputsHTML += '<div><h3>Colonia</h3><p>' + data[0].colonia + '</p></div>';
+                    inputsHTML += '<div><h3>Calle</h3><p>' + data[0].calle + '</p></div>';
+                    break;
+
+
+                case '5':
+                    inputsHTML += '<div><img src=' + data[0].imagen +'height=300px width=300px' + '></div>';
+                    inputsHTML += '<div><h3>Colonia</h3><p>' + data[0].colonia + '</p></div>';
+                    inputsHTML += '<div><h3>Calle</h3><p>' + data[0].calle + '</p></div>';
+                    break;
+
+                default:
+                    break;
+            }
+
     res.render('ciudadanoreporte', {tabla});
 }
 
