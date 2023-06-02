@@ -1674,5 +1674,35 @@ h3 {
     
 }
 
+.formciudadano{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    width: 80%;
+}
+
+
+.formciudadano form{
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    background-color: var(--color1);
+    padding: 2rem;
+    border-radius: 1rem;
+    gap: 1rem;
+    width: 60%;
+}
+
+.formciudadano form input{
+    padding: 1.2rem;
+}
+
+.formciudadano form button{
+    padding: 1.2rem;
+    background-color: var(--NegroBotones);
+    color: var(--blanco);
+    border-radius: 1rem;
+}
 
 }

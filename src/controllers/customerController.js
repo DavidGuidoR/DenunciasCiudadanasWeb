@@ -1248,7 +1248,111 @@ controller.pantallaCiudadano = (req,res) =>{
 
 controller.pantallaPerfilCiudadano = (req,res) =>{
     const id_ciudadano=req.params.id_ciudadano;
-    const consulta = 'SELECT * FROM ciudadano WHERE id_ciudadano = ?';
+    const dependencia = req.body.id_dependencia;
+    var consulta2 = '';
+    const {fecha,descripcion,latitud,longitud,n_apoyos,estatus,n_denuncias,referencias,tipo_reporte,id_dependencia}=req.body;
+    const consulta1 = 'INSERT INTO reporte (fecha,descripcion,latitud,longitud,n_apoyos,estatus,n_denuncias,referencias,id_ciudadano,tipo_reporte,id_dependencia) VALUES (?,?,?,?,?,?,?,?,?,?,?)';
+    switch(dependencia){
+        case 1:
+            var {cve_predio, colonia, calle } = req.body;
+            consulta2 = `INSERT INTO reporte_ooapas (cve_predio, colonia, calle, id_reporte) VALUES (?, ?, ?, ?)`;
+            // consulta2 = 'INSERT INTO reporte (fecha,descripcion,latitud,longitud,n_apoyos,estatus,n_denuncias,referencias,id_ciudadano,tipo_reporte,id_dependencia) VALUES (?,?,?,?,?,?,?,?,?,?,?)';
+            break;
+        case 2:
+            var {tipo_mascota, colonia, calle } = req.body;
+            consulta2 = `INSERT INTO reporte_m_animal (tipo_mascota, id_reporte, colonia, calle) VALUES ( ?, ?, ?, ?)`
+            // consulta2 = 'INSERT INTO reporte (?,?,?,?,?,?,?,?,?,?,?)';
+            break;
+        case 3:
+            var {imagen, colonia, calle } = req.body;
+            consulta2 = `INSERT INTO reporte_vial (imagen, id_reporte, colonia, calle) VALUES ( ?, ?, ?, ?)`
+            // consulta2 = 'INSERT INTO reporte (?,?,?,?,?,?,?,?,?,?,?)';
+            break;
+        case 4:
+            var {colonia, calle } = req.body;
+            consulta2 = `INSERT INTO reporte_alumbrado_publico (id_reporte, colonia, calle) VALUES ( ?, ?, ?)`
+            // consulta2 = 'INSERT INTO reporte (?,?,?,?,?,?,?,?,?,?,?)';
+            break;
+        case 5:
+            var {imagen, colonia, calle } = req.body;
+            consulta2 = `INSERT INTO reporte_bacheo (imagen, id_reporte, colonia, calle) VALUES ( ?, ?, ?, ?)`
+            // consulta2 = 'INSERT INTO reporte (?,?,?,?,?,?,?,?,?,?,?)';
+            break;
+        default: res.send('error en dependencia');
+    }
+    req.getConnection((err,conn) =>{
+        conn.query(consulta1,[fecha,descripcion,latitud,longitud,n_apoyos,estatus,n_denuncias,referencias,tipo_reporte,id_dependencia],(err,data) =>{
+            if(err){
+                res.json(err);
+            } else {
+                conn.query(consulta2),[],(err,data) =>{
+                    
+                }
+                res.render('ciudadanoperfil', {data:data})
+            }
+        })
+    });
+}
+
+controller.formReporte = (req,res) => {
+    console.log(req.body.tabla);
+    var dependencia = ''
+    const tabla = req.body.tabla;
+    let inputsHTML = '';
+                switch (tabla) {
+                
+
+                case 'reporte_ooapas':
+                    dependencia = 1;
+                    inputsHTML += '<input type="text" name="cve_predio" required placeholder=ClavePredio>';
+                    inputsHTML += '<input type="text" name="colonia" required placeholder=Colonia>';
+                    inputsHTML += '<input type="text" name="calle" required placeholder=Calle>';
+                    break;
+
+                case 'reporte_m_animal':
+                    dependencia = 2;
+                    inputsHTML += '<input type="text" name="tipo_mascota" required placeholder=TipoMascota>';
+                    inputsHTML += '<input type="text" name="colonia" required placeholder=Colonia>';
+                    inputsHTML += '<input type="text" name="calle" required placeholder=Calle>';
+                    break;
+
+                case 'reporte_vial':
+                    dependencia = 3;
+                    inputsHTML += '<input type="file" name="imagen" required>';
+                    inputsHTML += '<input type="text" name="colonia" required placeholder=Colonia>';
+                    inputsHTML += '<input type="text" name="calle" required placeholder=Calle>';
+                    break;
+
+                case 'reporte_alumbrado_publico':
+                    dependencia = 4;
+                    inputsHTML += '<input type="text" name="colonia" required placeholder=Colonia>';
+                    inputsHTML += '<input type="text" name="calle" required placeholder=Calle>';
+                    break;
+
+
+                case 'reporte_bacheo':
+                    dependencia = 5;
+                    inputsHTML += '<input type="file" name="imagen" required>';
+                    inputsHTML += '<input type="text" name="colonia" required placeholder=Colonia>';
+                    inputsHTML += '<input type="text" name="colonia" required placeholder=Calle>';
+                    break;
+
+                default:
+                    break;
+            }
+
+    res.render('ciudadanoreporte', {tabla, inputsHTML, dependencia});
+}
+
+controller.pantallaReporteCiudadano = (req,res) =>{
+    res.render('ciudadanotiporeporte');   
+}
+
+controller.reporte = (req,res) =>{
+    const reporte = req.body;
+    const tabla =req.body.tabla
+
+    console.log(reporte);
     req.getConnection((err,conn) =>{
         conn.query(consulta,[id_ciudadano],(err,data) =>{
             if(err){
@@ -1258,56 +1362,6 @@ controller.pantallaPerfilCiudadano = (req,res) =>{
             }
         })
     });
-}
-
-controller.formReporte = (req,res) => {
-    console.log(req.body.tabla);
-    const tabla = req.body.tabla;
-    let inputsHTML = '';
-                switch (dependencia) {
-                
-
-                case '1':
-                    inputsHTML += '<div><h3>Clave de predio:</h3><p>' + data[0].cve_predio + '</p></div>';
-                    inputsHTML += '<div><h3>Colonia</h3><p>' + data[0].colonia + '</p></div>';
-                    inputsHTML += '<div><h3>Calle</h3><p>' + data[0].calle + '</p></div>';
-
-                    break;
-
-                case '2':
-                    inputsHTML += '<div><h3>Tipo de mascota:</h3><p>' + data[0].tipo_mascota + '</p></div>';
-                    inputsHTML += '<div><h3>Colonia</h3><p>' + data[0].colonia + '</p></div>';
-                    inputsHTML += '<div><h3>Calle</h3><p>' + data[0].calle + '</p></div>';
-
-                    break;
-
-                case '3':
-                    inputsHTML += '<div><img src=' + data[0].imagen+ ' width=300px height=300px></div>';
-                    inputsHTML += '<div><h3>Colonia</h3><p>' + data[0].colonia + '</p></div>';
-                    inputsHTML += '<div><h3>Calle</h3><p>' + data[0].calle + '</p></div>';
-                    break;
-
-                case '4':
-                    inputsHTML += '<div><h3>Colonia</h3><p>' + data[0].colonia + '</p></div>';
-                    inputsHTML += '<div><h3>Calle</h3><p>' + data[0].calle + '</p></div>';
-                    break;
-
-
-                case '5':
-                    inputsHTML += '<div><img src=' + data[0].imagen +'height=300px width=300px' + '></div>';
-                    inputsHTML += '<div><h3>Colonia</h3><p>' + data[0].colonia + '</p></div>';
-                    inputsHTML += '<div><h3>Calle</h3><p>' + data[0].calle + '</p></div>';
-                    break;
-
-                default:
-                    break;
-            }
-
-    res.render('ciudadanoreporte', {tabla});
-}
-
-controller.pantallaReporteCiudadano = (req,res) =>{
-    res.render('ciudadanotiporeporte');   
 }
 
 module.exports = controller;

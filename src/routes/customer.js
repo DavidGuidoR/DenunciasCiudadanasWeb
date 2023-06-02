@@ -75,6 +75,7 @@ router.get('/pantallaCiudadano',customerController.pantallaCiudadano);
 router.get('/pantallaPerfilCiudadano/:id_ciudadano',customerController.pantallaPerfilCiudadano);
 router.get('/pantallaReporteCiudadano',customerController.pantallaReporteCiudadano);
 router.post('/formReporte',customerController.formReporte);
+router.post('/reporte',customerController.reporte);
 
 // Rutas de penalizacion
 router.post('/penalizarreporte/:id_reporte', customerController.penalizarreporte);
