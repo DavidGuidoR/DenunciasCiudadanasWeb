@@ -12,16 +12,25 @@ const PDFDocument = require('pdfkit');
 const fs = require('fs');
 const SftpClient = require('ssh2-sftp-client');
 
+
 const storage = multer.diskStorage({
   destination: './src/public/reportes_img/',
-  filename: (req, file, cb) =>  {
-    cb(null, file.originalname)
+  filename: (req, file, cb) => {
+    const currentDate = new Date().toISOString().replace(/:/g, '-'); // Obtener la fecha actual como un string con el formato adecuado
+    const fileName = currentDate + '-' + file.originalname; // Agregar la fecha al nombre original del archivo
+    cb(null, fileName);
+    module.exports.fileName = fileName;
   }
 });
 
 const app = express();
 //importando rutas
 const customerRoutes = require('./routes/customer'); //direccion del archivo customer
+
+app.use (multer({
+  storage: storage,
+  dest: './src/public/reportes_img/',
+}).single('imagen'))
 
 
 //configuraciones
@@ -35,14 +44,6 @@ app.set('layout', 'layout');
 
 
 // ... otras configuraciones de Express ...
-
-// Ruta para mostrar imágenes
-app.get('/imagen/:formato/:base64', (req, res) => {
-  const { formato, base64 } = req.params;
-  const imageDataURL = `data:image/${formato};base64,${base64}`;
-  res.set('Content-Type', `image/${formato}`);
-  res.send(Buffer.from(base64, 'base64'));
-});
 
 // ... otras rutas y configuraciones de la aplicación ...
 
@@ -79,12 +80,6 @@ app.use((req, res, next) => {
 app.use(express.urlencoded({extend: false}));
 
 //middleware manejo de imágenes en servidor
-//Establecemos para manejo de imagenes
-
-app.use (multer({
-  storage: storage,
-  dest: '137.117.123.255/reportes_img/'
-}).single('imagen'))
 
 //routes: rutas que el cliente puede solicitar a los archivos
 app.use('/', customerRoutes);
@@ -96,3 +91,5 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.listen(4000, ()=>{
     console.log('Servidor escuchando el puerto 4000');
 });
+
+

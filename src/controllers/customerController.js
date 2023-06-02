@@ -8,44 +8,65 @@ const SftpClient = require('ssh2-sftp-client');
 
 const controller = {};
 
+
 // Pantallas y vistas de la aplicacion-------------------------------------------------------------------------------------------------------------------
 controller.render = (req, res) => {
+    const actividad = 'Acceso al menu principal';
+  fs.appendFileSync('registro.txt', `${new Date().toISOString()}: ${actividad}\n`);
     res.render('menuPrincipal');
 }
 
 controller.pantallaRegistro = (req, res) => {
+    const actividad = 'Acceso al registro';
+  fs.appendFileSync('registro.txt', `${new Date().toISOString()}: ${actividad}\n`);
     res.render('Registro');
 }
 
 controller.pantallaSesion = (req, res) => {
+    const actividad = 'Acceso al inicio de sesion';
+  fs.appendFileSync('registro.txt', `${new Date().toISOString()}: ${actividad}\n`);
     res.render('inicioSesion');
 }
 
 controller.pantallaSesionModerador = (req, res) => {
+    const actividad = 'Acceso al inicio de sesion moderador';
+  fs.appendFileSync('registro.txt', `${new Date().toISOString()}: ${actividad}\n`);
     res.render('iniciosesionmoderador');
 }
 
 controller.pantallaSesionAdministrador = (req, res) => {
+    const actividad = 'Acceso al inicio de sesion administrador';
+  fs.appendFileSync('registro.txt', `${new Date().toISOString()}: ${actividad}\n`);
     res.render('iniciosesionadministrador');
 }
 
 controller.pantallaSesionEncargado = (req, res) => {
+    const actividad = 'Acceso al inicio de sesion encargado';
+  fs.appendFileSync('registro.txt', `${new Date().toISOString()}: ${actividad}\n`);
     res.render('iniciosesionencargado');
 }
 
 controller.pantallaSesionCiudadano = (req, res) => {
+    const actividad = 'Acceso al inicio de sesion ciudadano';
+  fs.appendFileSync('registro.txt', `${new Date().toISOString()}: ${actividad}\n`);
     res.render('iniciosesionciudadano');
 }
 
 controller.pantallaMenuPrincipal = (req, res) => {
+    const actividad = 'Acceso al menu principal';
+  fs.appendFileSync('registro.txt', `${new Date().toISOString()}: ${actividad}\n`);
     res.render('menuPrincipal');
 }
 
 controller.pantallaModeracion = (req, res) => {
+    const actividad = 'Acceso a Moderacion';
+  fs.appendFileSync('registro.txt', `${new Date().toISOString()}: ${actividad}\n`);
     res.render('moderacion');
 }
 
 controller.pantallaAdministracion = (req, res) => {
+    const actividad = 'Acceso a administración';
+  fs.appendFileSync('registro.txt', `${new Date().toISOString()}: ${actividad}\n`);
     res.render('administracion');
 }
 
@@ -72,6 +93,8 @@ controller.pruebapantsubirimagen = (req,res) => {
 
 //registro de usuarios
 controller.registro = (req,res) =>{
+    const actividad = 'Acceso al registro de usuario';
+  fs.appendFileSync('registro.txt', `${new Date().toISOString()}: ${actividad}\n`);
     const ciudadano = req.body; // Suponiendo que el objeto JSON contiene todos los campos del post
     console.log(ciudadano)
   const query = 'INSERT INTO ciudadano SET ?';
@@ -90,6 +113,8 @@ controller.registro = (req,res) =>{
 
 // Inicio de sesion dinamico-------------------------------------------------------------------------------------------------------------
 controller.inicioSesion = (req, res) => {
+    const actividad = 'Comprobacion inicio de sesion';
+  fs.appendFileSync('registro.txt', `${new Date().toISOString()}: ${actividad}\n`);
     // Obtenemos el usuario y la contraseña del cuerpo de la solicitud
     const tabla = req.params.tabla;
     var telefono='';
@@ -266,6 +291,8 @@ controller.inicioSesion = (req, res) => {
 //Funciones de la administracion-------------------------------------------------
 
 controller.pantallaPerfilAdministrador = (req,res) => {
+    const actividad = 'Acceso al perfil del administrador';
+  fs.appendFileSync('registro.txt', `${new Date().toISOString()}: ${actividad}\n`);
     const id_empleado=req.params.id_empleado;
     const consulta = 'SELECT * FROM empleado WHERE id_empleado = ?';
     req.getConnection((err,conn) =>{
@@ -280,6 +307,8 @@ controller.pantallaPerfilAdministrador = (req,res) => {
 }
 
 controller.administracionEncargado_dependencias = (req, res) => {
+    const actividad = 'El administrador acceso a encargados de las dependencias';
+  fs.appendFileSync('registro.txt', `${new Date().toISOString()}: ${actividad}\n`);
     req.getConnection((err, conn) => {
         conn.query('SELECT r.id_encargado, r.nombre, r.apellido_paterno, r.apellido_materno, c.nombre AS nombre_dependencia, r.usuario, r.contrasena FROM encargado_dependencia r JOIN dependencia c ON r.id_dependencia = c.id_dependencia', (err, encargados) => {
             if (err) {
@@ -293,6 +322,8 @@ controller.administracionEncargado_dependencias = (req, res) => {
 }
 
 controller.administracionEmpleados = (req, res) => {
+    const actividad = 'El administrador acceso a la seccion empleados';
+  fs.appendFileSync('registro.txt', `${new Date().toISOString()}: ${actividad}\n`);
     req.getConnection((err, conn) => {
         conn.query('SELECT * FROM empleado', (err, empleados) => {
             if (err) {
@@ -305,6 +336,8 @@ controller.administracionEmpleados = (req, res) => {
 }
 
 controller.administracionDependencias = (req, res) => {
+    const actividad = 'El administrador acceeso a la seccion dependencias';
+  fs.appendFileSync('registro.txt', `${new Date().toISOString()}: ${actividad}\n`);
     req.getConnection((err, conn) => {
         conn.query('SELECT * FROM dependencia', (err, dependencias) => {
             if (err) {
@@ -317,6 +350,8 @@ controller.administracionDependencias = (req, res) => {
 }
 
 controller.administracionCiudadanos = (req, res) => {
+    const actividad = 'El administrador accedio a la seccion ciudadanos';
+  fs.appendFileSync('registro.txt', `${new Date().toISOString()}: ${actividad}\n`);
     req.getConnection((err, conn) => {
         conn.query('SELECT * FROM ciudadano', (err, usuarios) => {
             if (err) {
@@ -329,6 +364,8 @@ controller.administracionCiudadanos = (req, res) => {
 }
 
 controller.administracionReportes = (req, res) => {
+    const actividad = 'El administrador acceso a la pantalla de los reportes';
+  fs.appendFileSync('registro.txt', `${new Date().toISOString()}: ${actividad}\n`);
     function formatDate(date) {
         const options = { day: '2-digit', month: '2-digit', year: '2-digit' };
         const formattedDate = new Date(date).toLocaleDateString('es-ES', options);
@@ -348,6 +385,8 @@ controller.administracionReportes = (req, res) => {
 
 //Funciones del CRUD ------------------------------------------------------------------------------------------- 
 controller.insert = (req, res) => {
+    const actividad = 'El administrador inserto un rgistro';
+  fs.appendFileSync('registro.txt', `${new Date().toISOString()}: ${actividad}\n`);
     const data = req.body;
     const tabla = req.params.tabla;
     console.log(tabla);
@@ -367,6 +406,8 @@ controller.insert = (req, res) => {
 }
 
 controller.delete = (req, res) => {
+    const actividad = 'El administrador borro un registro';
+  fs.appendFileSync('registro.txt', `${new Date().toISOString()}: ${actividad}\n`);
     const id = req.params.id;
     const tabla = req.params.tabla;
     if (tabla == 'encargado_dependencia') {
@@ -394,6 +435,8 @@ controller.delete = (req, res) => {
 }
 
 controller.pantallaEdit = (req, res) => {
+    const actividad = 'El administrador entro a editar un registro';
+  fs.appendFileSync('registro.txt', `${new Date().toISOString()}: ${actividad}\n`);
     const tabla = req.params.tabla;
     var puntero = '';
     const id = req.params.id;
@@ -474,6 +517,8 @@ controller.pantallaEdit = (req, res) => {
 }
 
 controller.edit = (req, res) => {
+    const actividad = 'El administrador intenta editar un registro';
+  fs.appendFileSync('registro.txt', `${new Date().toISOString()}: ${actividad}\n`);
     const tabla = req.params.tabla;
     const datos = req.body;
     var puntero = '';
@@ -515,10 +560,14 @@ controller.edit = (req, res) => {
 
 // Funciones del moderador--------------------------------------------------------------------------------------------------------------------
 controller.menumoderacion = (req, res) => {
+    const actividad = 'Acceso al panel de moderador';
+  fs.appendFileSync('registro.txt', `${new Date().toISOString()}: ${actividad}\n`);
     res.render('moderacion');
 }
 
 controller.pantallaPerfilModerador = (req,res) => {
+    const actividad = 'El moderador accedio al perfil';
+  fs.appendFileSync('registro.txt', `${new Date().toISOString()}: ${actividad}\n`);
     const id_empleado=req.params.id_empleado;
     const consulta = 'SELECT * FROM empleado WHERE id_empleado = ?';
     req.getConnection((err,conn) =>{
@@ -533,6 +582,8 @@ controller.pantallaPerfilModerador = (req,res) => {
 }
 
 controller.pantallaReportesRevisados = (req, res) => {
+    const actividad = 'El moderador accedio a la pantalla reportes revisados';
+  fs.appendFileSync('registro.txt', `${new Date().toISOString()}: ${actividad}\n`);
     function formatDate(date) {
         const options = { day: '2-digit', month: '2-digit', year: '2-digit' };
         const formattedDate = new Date(date).toLocaleDateString('es-ES', options);
@@ -550,6 +601,8 @@ controller.pantallaReportesRevisados = (req, res) => {
 }
 
 controller.pantallaReportesEntrantes = (req, res) => {
+    const actividad = 'El moderador accedio a la pantalla de reportes entrantes';
+  fs.appendFileSync('registro.txt', `${new Date().toISOString()}: ${actividad}\n`);
     function formatDate(date) {
         const options = { day: '2-digit', month: '2-digit', year: '2-digit' };
         const formattedDate = new Date(date).toLocaleDateString('es-ES', options);
@@ -567,6 +620,8 @@ controller.pantallaReportesEntrantes = (req, res) => {
 }
 
 controller.pantallaVisualizarReporte = (req, res) => {
+    const actividad = 'El moderador visualiza un reporte';
+  fs.appendFileSync('registro.txt', `${new Date().toISOString()}: ${actividad}\n`);
     const { id_reporte } = req.params;
     function formatDate(date) {
         const options = { day: '2-digit', month: '2-digit', year: '2-digit' };
@@ -590,6 +645,8 @@ controller.pantallaVisualizarReporte = (req, res) => {
 
 
 controller.cambiarestatus = (req, res) => {
+    const actividad = 'El moderador cambio el estatus de un reporte';
+  fs.appendFileSync('registro.txt', `${new Date().toISOString()}: ${actividad}\n`);
     const { id_reporte } = req.params;
     const newCustumer = req.body['estatuscb'];
     req.getConnection((err, conn) => {
@@ -604,6 +661,8 @@ controller.cambiarestatus = (req, res) => {
 }
 
 controller.penalizarreporte = (req, res) => {
+    const actividad = 'El moderador penalizo un reporte';
+  fs.appendFileSync('registro.txt', `${new Date().toISOString()}: ${actividad}\n`);
     const { id_reporte } = req.params;
     const usermod = req.body['usermod'];
 
@@ -635,6 +694,8 @@ controller.penalizarreporte = (req, res) => {
 }
 
 controller.penalizar = (req, res) => {
+    const actividad = 'Se penalizo un reporte';
+  fs.appendFileSync('registro.txt', `${new Date().toISOString()}: ${actividad}\n`);
     const { id_reporte } = req.params;
     function formatDate(date) {
         const options = { day: '2-digit', month: '2-digit', year: '2-digit' };
@@ -658,6 +719,8 @@ controller.penalizar = (req, res) => {
 }
 
 controller.eliminar = (req, res) => {
+    const actividad = 'El moderador accede a la pantalla eliminar reporte';
+  fs.appendFileSync('registro.txt', `${new Date().toISOString()}: ${actividad}\n`);
     const { id_reporte } = req.params;
     function formatDate(date) {
         const options = { day: '2-digit', month: '2-digit', year: '2-digit' };
@@ -681,6 +744,8 @@ controller.eliminar = (req, res) => {
 }
 
 controller.eliminarreporte = (req, res) => {
+    const actividad = 'El moderador elimino un reporte';
+  fs.appendFileSync('registro.txt', `${new Date().toISOString()}: ${actividad}\n`);
     const { id_reporte } = req.params;
     const usermod = req.body['usermod'];
     const userrep = req.body['userrep'];
@@ -743,10 +808,14 @@ controller.eliminarreporte = (req, res) => {
 
 // Funciones del encargado de dependencia-----------------------------------------------------------------------------------------------------------------
 controller.pantallaEncargado = (req, res) => {
+    const actividad = 'Se accedio al panel de encargado';
+  fs.appendFileSync('registro.txt', `${new Date().toISOString()}: ${actividad}\n`);
     res.render('encargado');
 }
 
 controller.pantallaPerfilEncargado = (req,res) => {
+    const actividad = 'El encargado accedio al perfil';
+  fs.appendFileSync('registro.txt', `${new Date().toISOString()}: ${actividad}\n`);
     const id_encargado=req.params.id_encargado;
     const consulta = 'SELECT * FROM encargado_dependencia WHERE id_encargado = ?';
     req.getConnection((err,conn) =>{
@@ -761,6 +830,8 @@ controller.pantallaPerfilEncargado = (req,res) => {
 }
 
 controller.pantallaReportesEntrantesEncargado = (req, res) => {
+    const actividad = 'El encargado entro a la pantalla de reportes entrantes';
+  fs.appendFileSync('registro.txt', `${new Date().toISOString()}: ${actividad}\n`);
     const dependencia = req.query.dependencia;
     var tabla = '';
     var id = '';
@@ -811,6 +882,8 @@ controller.pantallaReportesEntrantesEncargado = (req, res) => {
 
 
     controller.pantallaReportesRevisadosEncargado = (req, res) => {
+        const actividad = 'El encargado entro a la pantalla de reportes revisados';
+  fs.appendFileSync('registro.txt', `${new Date().toISOString()}: ${actividad}\n`);
         const dependencia = req.query.dependencia;
         console.log(dependencia);
         var tabla = '';
@@ -875,6 +948,8 @@ controller.pantallaReportesEntrantesEncargado = (req, res) => {
       
 
     controller.pantallaVisualizarReportesEncargado = (req,res) => {
+        const actividad = 'El encargado visualizo un reporte';
+  fs.appendFileSync('registro.txt', `${new Date().toISOString()}: ${actividad}\n`);
         
         
         const dependencia=req.params.dependencia;
@@ -941,9 +1016,9 @@ controller.pantallaReportesEntrantesEncargado = (req, res) => {
                     inputsHTML += '<div><h3>Calle</h3><p>' + data[0].calle + '</p></div>';
 
                     break;
-
+                    
                 case '3':
-                    inputsHTML += '<div><img src=' + data[0].imagen+ ' width=300px height=300px></div>';
+                    inputsHTML += '<div><img src=/reportes_img/' + data[0].imagen+ ' width=300px height=300px></div>';
                     inputsHTML += '<div><h3>Colonia</h3><p>' + data[0].colonia + '</p></div>';
                     inputsHTML += '<div><h3>Calle</h3><p>' + data[0].calle + '</p></div>';
                     break;
@@ -955,7 +1030,7 @@ controller.pantallaReportesEntrantesEncargado = (req, res) => {
 
 
                 case '5':
-                    inputsHTML += '<div><img src=' + data[0].imagen +'height=300px width=300px' + '></div>';
+                    inputsHTML += '<div><img src=/reportes_img/' + data[0].imagen +' height=300px width=300px' + '></div>';
                     inputsHTML += '<div><h3>Colonia</h3><p>' + data[0].colonia + '</p></div>';
                     inputsHTML += '<div><h3>Calle</h3><p>' + data[0].calle + '</p></div>';
                     break;
@@ -975,8 +1050,9 @@ controller.pantallaReportesEntrantesEncargado = (req, res) => {
 };
 
 
-
     controller.rechazarReportesEncargado = (req,res) => {
+        const actividad = 'El encargado entro a rechazar un reporte';
+  fs.appendFileSync('registro.txt', `${new Date().toISOString()}: ${actividad}\n`);
         const id_tabla = req.params.id_tabla;
         const id_reporte = req.params.id_reporte;
         const id_encargado = req.params.id_encargado;
@@ -1005,6 +1081,8 @@ controller.pantallaReportesEntrantesEncargado = (req, res) => {
     }
 
     controller.cambiarEstatusReportesEncargado = (req,res) =>{
+        const actividad = 'El encargado cambio el estatus de un reporte';
+  fs.appendFileSync('registro.txt', `${new Date().toISOString()}: ${actividad}\n`);
         const id_reporte = req.body['id_reporte'];
         const estatus = 'cancelado';
         const id_encargado = req.body['id_encargado'];
@@ -1039,6 +1117,8 @@ controller.pantallaReportesEntrantesEncargado = (req, res) => {
 
 
         controller.solucionarReportesEncargado = (req,res) => {
+            const actividad = 'El encargado accedio a la pantalla de reporte solucionado';
+  fs.appendFileSync('registro.txt', `${new Date().toISOString()}: ${actividad}\n`);
                 const id_reporte = req.params.id_reporte;
                 const estatus = 'solucionado';  
                 const id_encargado = req.params.id_encargado;
@@ -1050,6 +1130,8 @@ controller.pantallaReportesEntrantesEncargado = (req, res) => {
         }
 
     controller.cambiarEstatusReportesSolucionado = (req, res) => {
+        const actividad = 'El encargado marco un reporte como solucionado';
+  fs.appendFileSync('registro.txt', `${new Date().toISOString()}: ${actividad}\n`);
         const id_reporte = req.body['id_reporte'];
         const estatus = req.body['estatus'];
         const id_encargado = req.body['id_encargado'];
@@ -1093,11 +1175,15 @@ controller.pantallaReportesEntrantesEncargado = (req, res) => {
             
 
     controller.advertenciaDescargarReportesEncargado = (req,res) => {
+        const actividad = 'El encargado intenta descargar un pdf del reporte';
+  fs.appendFileSync('registro.txt', `${new Date().toISOString()}: ${actividad}\n`);
         const id_reporte = req.params.id_reporte;
         res.render('encargadodescargarreportes', {id_reporte});
         }
 
     controller.descargarReportesEncargado = (req,res) => {
+        const actividad = 'El encargado descargo un reporte';
+  fs.appendFileSync('registro.txt', `${new Date().toISOString()}: ${actividad}\n`);
         
   const dependencia = req.params.dependencia;
   const id_reporte = req.params.id_reporte;
@@ -1196,6 +1282,7 @@ controller.pantallaReportesEntrantesEncargado = (req, res) => {
 }
 
 async function subirImagen(nombreArchivo, rutaLocal) {
+    
     const sftp = new SftpClient();
   
     try {
@@ -1243,116 +1330,16 @@ controller.pruebasubirimagen = (req,res) =>{
 
 // MODULOS DEL CIUDADANO ------------------------------------------------------------------------
 controller.pantallaCiudadano = (req,res) =>{
+    const actividad = 'Se accedio al panel del ciudadano';
+  fs.appendFileSync('registro.txt', `${new Date().toISOString()}: ${actividad}\n`);
     res.render('ciudadano');
 }
 
 controller.pantallaPerfilCiudadano = (req,res) =>{
+    const actividad = 'El ciudadano accedio a su perfil';
+  fs.appendFileSync('registro.txt', `${new Date().toISOString()}: ${actividad}\n`);
     const id_ciudadano=req.params.id_ciudadano;
-    const dependencia = req.body.id_dependencia;
-    var consulta2 = '';
-    const {fecha,descripcion,latitud,longitud,n_apoyos,estatus,n_denuncias,referencias,tipo_reporte,id_dependencia}=req.body;
-    const consulta1 = 'INSERT INTO reporte (fecha,descripcion,latitud,longitud,n_apoyos,estatus,n_denuncias,referencias,id_ciudadano,tipo_reporte,id_dependencia) VALUES (?,?,?,?,?,?,?,?,?,?,?)';
-    switch(dependencia){
-        case 1:
-            var {cve_predio, colonia, calle } = req.body;
-            consulta2 = `INSERT INTO reporte_ooapas (cve_predio, colonia, calle, id_reporte) VALUES (?, ?, ?, ?)`;
-            // consulta2 = 'INSERT INTO reporte (fecha,descripcion,latitud,longitud,n_apoyos,estatus,n_denuncias,referencias,id_ciudadano,tipo_reporte,id_dependencia) VALUES (?,?,?,?,?,?,?,?,?,?,?)';
-            break;
-        case 2:
-            var {tipo_mascota, colonia, calle } = req.body;
-            consulta2 = `INSERT INTO reporte_m_animal (tipo_mascota, id_reporte, colonia, calle) VALUES ( ?, ?, ?, ?)`
-            // consulta2 = 'INSERT INTO reporte (?,?,?,?,?,?,?,?,?,?,?)';
-            break;
-        case 3:
-            var {imagen, colonia, calle } = req.body;
-            consulta2 = `INSERT INTO reporte_vial (imagen, id_reporte, colonia, calle) VALUES ( ?, ?, ?, ?)`
-            // consulta2 = 'INSERT INTO reporte (?,?,?,?,?,?,?,?,?,?,?)';
-            break;
-        case 4:
-            var {colonia, calle } = req.body;
-            consulta2 = `INSERT INTO reporte_alumbrado_publico (id_reporte, colonia, calle) VALUES ( ?, ?, ?)`
-            // consulta2 = 'INSERT INTO reporte (?,?,?,?,?,?,?,?,?,?,?)';
-            break;
-        case 5:
-            var {imagen, colonia, calle } = req.body;
-            consulta2 = `INSERT INTO reporte_bacheo (imagen, id_reporte, colonia, calle) VALUES ( ?, ?, ?, ?)`
-            // consulta2 = 'INSERT INTO reporte (?,?,?,?,?,?,?,?,?,?,?)';
-            break;
-        default: res.send('error en dependencia');
-    }
-    req.getConnection((err,conn) =>{
-        conn.query(consulta1,[fecha,descripcion,latitud,longitud,n_apoyos,estatus,n_denuncias,referencias,tipo_reporte,id_dependencia],(err,data) =>{
-            if(err){
-                res.json(err);
-            } else {
-                conn.query(consulta2),[],(err,data) =>{
-                    
-                }
-                res.render('ciudadanoperfil', {data:data})
-            }
-        })
-    });
-}
-
-controller.formReporte = (req,res) => {
-    console.log(req.body.tabla);
-    var dependencia = ''
-    const tabla = req.body.tabla;
-    let inputsHTML = '';
-                switch (tabla) {
-                
-
-                case 'reporte_ooapas':
-                    dependencia = 1;
-                    inputsHTML += '<input type="text" name="cve_predio" required placeholder=ClavePredio>';
-                    inputsHTML += '<input type="text" name="colonia" required placeholder=Colonia>';
-                    inputsHTML += '<input type="text" name="calle" required placeholder=Calle>';
-                    break;
-
-                case 'reporte_m_animal':
-                    dependencia = 2;
-                    inputsHTML += '<input type="text" name="tipo_mascota" required placeholder=TipoMascota>';
-                    inputsHTML += '<input type="text" name="colonia" required placeholder=Colonia>';
-                    inputsHTML += '<input type="text" name="calle" required placeholder=Calle>';
-                    break;
-
-                case 'reporte_vial':
-                    dependencia = 3;
-                    inputsHTML += '<input type="file" name="imagen" required>';
-                    inputsHTML += '<input type="text" name="colonia" required placeholder=Colonia>';
-                    inputsHTML += '<input type="text" name="calle" required placeholder=Calle>';
-                    break;
-
-                case 'reporte_alumbrado_publico':
-                    dependencia = 4;
-                    inputsHTML += '<input type="text" name="colonia" required placeholder=Colonia>';
-                    inputsHTML += '<input type="text" name="calle" required placeholder=Calle>';
-                    break;
-
-
-                case 'reporte_bacheo':
-                    dependencia = 5;
-                    inputsHTML += '<input type="file" name="imagen" required>';
-                    inputsHTML += '<input type="text" name="colonia" required placeholder=Colonia>';
-                    inputsHTML += '<input type="text" name="colonia" required placeholder=Calle>';
-                    break;
-
-                default:
-                    break;
-            }
-
-    res.render('ciudadanoreporte', {tabla, inputsHTML, dependencia});
-}
-
-controller.pantallaReporteCiudadano = (req,res) =>{
-    res.render('ciudadanotiporeporte');   
-}
-
-controller.reporte = (req,res) =>{
-    const reporte = req.body;
-    const tabla =req.body.tabla
-
-    console.log(reporte);
+    const consulta = 'SELECT * FROM ciudadano WHERE id_ciudadano = ?';
     req.getConnection((err,conn) =>{
         conn.query(consulta,[id_ciudadano],(err,data) =>{
             if(err){
@@ -1363,5 +1350,186 @@ controller.reporte = (req,res) =>{
         })
     });
 }
+
+controller.formReporte = (req,res) => {
+    const actividad = 'El ciudadano solicito un reporte';
+  fs.appendFileSync('registro.txt', `${new Date().toISOString()}: ${actividad}\n`);
+    console.log(req.body.tabla);
+    var dependencia = ''
+    const tabla = req.body.tabla;
+    let inputsHTML = '';
+    var tipo_reporte='';
+                switch (tabla) {
+                
+
+                case 'reporte_ooapas':
+                    dependencia = 1;
+                    tipo_reporte=4;
+                    inputsHTML += '<input type="text" name="cve_predio" required placeholder=ClavePredio>';
+                    inputsHTML += '<input type="text" name="colonia" required placeholder=Colonia>';
+                    inputsHTML += '<input type="text" name="calle" required placeholder=Calle>';
+                    break;
+
+                case 'reporte_m_animal':
+                    dependencia = 2;
+                    tipo_reporte=3;
+                    inputsHTML += '<input type="text" name="tipo_mascota" required placeholder=TipoMascota>';
+                    inputsHTML += '<input type="text" name="colonia" required placeholder=Colonia>';
+                    inputsHTML += '<input type="text" name="calle" required placeholder=Calle>';
+                    break;
+
+                case 'reporte_vial':
+                    dependencia = 3;
+                    tipo_reporte=5;
+                    inputsHTML += '<input type="file" name="imagen" required>';
+                    inputsHTML += '<input type="text" name="colonia" required placeholder=Colonia>';
+                    inputsHTML += '<input type="text" name="calle" required placeholder=Calle>';
+                    break;
+
+                case 'reporte_alumbrado_publico':
+                    dependencia = 4;
+                    tipo_reporte=1;
+                    inputsHTML += '<input type="text" name="colonia" required placeholder=Colonia>';
+                    inputsHTML += '<input type="text" name="calle" required placeholder=Calle>';
+                    break;
+
+
+                case 'reporte_bacheo':
+                    dependencia = 5;
+                    tipo_reporte=2;
+                    inputsHTML += '<input type="file" name="imagen" required>';
+                    inputsHTML += '<input type="text" name="colonia" required placeholder=Colonia>';
+                    inputsHTML += '<input type="text" name="calle" required placeholder=Calle>';
+                    break;
+
+                default:
+                    break;
+            }
+
+    res.render('ciudadanoreporte', {tabla, inputsHTML, dependencia, tipo_reporte});
+}
+
+
+controller.pantallaReporteCiudadano = (req,res) =>{
+    const actividad = 'El ciudadano accedio a seleccionar un tipo de reporte a reportar';
+  fs.appendFileSync('registro.txt', `${new Date().toISOString()}: ${actividad}\n`);
+    res.render('ciudadanotiporeporte');   
+}
+
+
+controller.reporte = (req,res) =>{
+    const actividad = 'Se realizo una denuncia o reporte';
+  fs.appendFileSync('registro.txt', `${new Date().toISOString()}: ${actividad}\n`);
+    const { fileName } = require('../app');
+
+    const id_ciudadano=req.body.id_ciudadano;
+    const dependencia = req.body.id_dependencia;
+    var consulta2 = '';
+    console.log('Informacion perteneciente al JSON de llegada');
+    console.log(req.body);
+
+    const {fecha,descripcion,latitud,longitud,n_apoyos,estatus,n_denuncias,referencias,tipo_reporte,id_dependencia}=req.body;
+    console.log('Una fecha de prueba'+fecha);
+    const reporteData ={
+        fecha,
+        descripcion,
+        latitud,
+        longitud,
+        n_apoyos,
+        estatus,
+        n_denuncias,
+        referencias,
+        id_ciudadano:id_ciudadano,
+        tipo_reporte,
+        id_dependencia,
+    }
+    console.log('Informacion del reporte data');
+
+    
+    req.getConnection((err, conn) => {
+        if(err){
+            res.send('error en la conexion');
+        } else{
+        conn.query('INSERT INTO reporte SET ?', [reporteData], (err, result) => {
+          if (err) {
+            console.error('Error al insertar el reporte:', err);
+            res.status(500).send('Error al insertar el reporte');
+          } else {
+            const id_reporte = result.insertId;
+            switch(dependencia){
+                case '1':
+                    var {cve_predio, colonia, calle} = req.body;
+                    var reportetipoData = {
+                        cve_predio,
+                        colonia,
+                        calle,
+                        id_reporte:id_reporte,
+                      };
+                    console.log('Informacion del reportetipoData');
+                    console.log(reportetipoData);
+                    consulta2 = 'INSERT INTO reporte_ooapas SET ?';
+                    break;
+                case '2':
+                    var {tipo_mascota, colonia, calle} = req.body;
+                    var reportetipoData = {
+                        tipo_mascota,
+                        colonia,
+                        calle,
+                        id_reporte:id_reporte,
+                      };
+                    consulta2 = 'INSERT INTO reporte_m_animal SET ?';
+                    break;
+                case '3':
+                    var {colonia, calle} = req.body;
+                    var reportetipoData = {
+                        imagen:fileName,
+                        colonia,
+                        calle,
+                        id_reporte:id_reporte,
+                      };
+                    consulta2 = 'INSERT INTO reporte_vial SET ?';
+                    break;
+                case '4':
+                    var {colonia, calle} = req.body;
+                    var reportetipoData = {
+                        colonia,
+                        calle,
+                        id_reporte:id_reporte,
+                      };
+                    consulta2 = 'INSERT INTO reporte_alumbrado_publico SET ?';
+                    break;
+                case '5':
+                    var {colonia, calle} = req.body;
+                    var reportetipoData = {
+                        imagen:fileName,
+                        colonia,
+                        calle,
+                        id_reporte:id_reporte,
+                      };
+                    consulta2 = 'INSERT INTO reporte_bacheo SET ?';
+                    break;
+                default: res.send('error en dependencia');
+            }
+            // Insertar el nuevo reporte_ooapas vinculado con el reporte correspondiente
+            conn.query(consulta2, [reportetipoData], (err) => {
+              if (err) {
+                console.error('Error al insertar el reporte_ooapas:', err);
+                console.log('Error al insertar el reporte_ooapas');
+              } else {
+                console.log('Reporte y reporte_ooapas insertados correctamente');
+                res.render('ciudadano');
+              }
+            });
+          }
+        });
+        }
+    });  
+}
+
+
+//Clasees del bot
+controller.chat = (req, res) => {
+    res.render('chatbot');
+  };
 
 module.exports = controller;

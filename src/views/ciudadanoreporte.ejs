@@ -52,20 +52,28 @@
     <div class="contenido">
         <div class="contenidomoderacion">
         <div class="formciudadano">
+            
+            <a class=flecharegresar href="/pantallaCiudadano" >
+                <i class="fa-sharp fa-solid fa-arrow-left"></i>
+            </a>
+            <h2>Por favor, rellene el formulario de denuncia</h2>
             <form action="/reporte" method="post" enctype="multipart/form-data">
             <input type="date" name="fecha" placeholder="Fecha" required>
-            <textarea name="descripcion" placeholder="Descripción" required></textarea>
+            <input type="text" maxlength="200" name="descripcion" placeholder="Descripción" required>
             <input type="hidden" name="n_apoyos" value=0  required>
             <input type="hidden" name="estatus" value="pendiente" placeholder="Estatus" required>
             <input type="hidden" name="n_denuncias" value="0" placeholder="Número de denuncias" required>
-            <input type="text" name="referencias" placeholder="Referencias" required>
+            <input type="text" maxlength="200" name="referencias" placeholder="Referencias" required>
             <input type="hidden" name="id_ciudadano" value="<%=session.id_ciudadano%>"  required>
-            <input type="hidden" name="tipo_reporte" value="1" placeholder="Tipo de reporte" required>
+            <input type="hidden" name="tipo_reporte" value="<%=tipo_reporte%>" placeholder="Tipo de reporte" required>
+            <input type="hidden" name="latitud" value="19.6869083" required>
+            <input type="hidden" name="longitud" value="-101.23794" required>
             <input type="hidden" name="id_dependencia"  value ="<%=dependencia%>" placeholder="ID de la dependencia" required>
-            <input type="hidden" name="tabla" value="<%=tabla%>" required>
+            <input type="hidden" name="tabla" value="<%=tabla%>"required>               
             <%- inputsHTML%>
             <button type="submit">Guardar</button>
             </form>
+
         </div>
         </div>
     </div>

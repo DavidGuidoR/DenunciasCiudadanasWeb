@@ -1703,6 +1703,26 @@ h3 {
     background-color: var(--NegroBotones);
     color: var(--blanco);
     border-radius: 1rem;
+    cursor: pointer;
+}
+
+.formciudadano form button:hover{
+    background-color: var(--negro);
+}
+
+
+.flecharegresar {
+    background-color: var(--Gris);
+    color: var(--negro);
+    padding: 0.8rem;
+    border-radius: 0.3rem;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    margin: auto 0;
+
 }
 
 }

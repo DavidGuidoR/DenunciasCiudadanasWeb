@@ -5,6 +5,7 @@ const express = require('express');
 const router = express.Router();
 //Mandamos llamar nuestro archivo de funciones customerController
 const customerController = require('../controllers/customerController');
+const fs = require('fs');
 
 //Aqui escribiremos todas nuestras url que el servidor podra manejar
 
@@ -89,5 +90,9 @@ router.get('/pruebapantsubirimagen',customerController.pruebapantsubirimagen);
 
 // Ruta de prueba para subir imagen
 router.post('/pruebasubirimagen', customerController.pruebasubirimagen);
+
+//Rutas chatbot
+router.get('/chat',customerController.chat); 
+  
 
 module.exports=router;
