@@ -73,6 +73,7 @@ router.post('/cambiarEstatusReportesSolucionado',customerController.cambiarEstat
 
 //rutas del ciudadano
 router.get('/pantallaCiudadano',customerController.pantallaCiudadano);
+router.get('/pantallaReporteRealizadoCiudadano',customerController.pantallaReporteRealizadoCiudadano);
 router.get('/pantallaPerfilCiudadano/:id_ciudadano',customerController.pantallaPerfilCiudadano);
 router.get('/pantallaReporteCiudadano',customerController.pantallaReporteCiudadano);
 router.post('/formReporte',customerController.formReporte);

@@ -1,0 +1,80 @@
+<%- include('partials/_header')%>
+<section id="navegacionmod">
+    <ul>
+        <h1>
+            <li>
+                <a href="/pantallaCiudadano">
+                <img src="/images/v.svg" alt="logo">
+                </a>
+            </li>
+            <li>
+                <a href="/pantallaCiudadano">
+                    Vialidolid<br>denuncias ciudadanas
+                </a>
+            </li>
+        </h1>
+        <div class="botonesmod">
+            <li>
+                <a href="/pantallaPerfilCiudadano/<%=session.id_ciudadano%>">Perfil</a>
+            </li>
+            <li>
+                <a href="/pantallaMenuPrincipal">Cerrar Sesion</a>
+            </li>
+        </div>
+
+    </ul>
+</section>
+
+
+<section id="contenidogeneral">
+    <article>
+        <div class="barralateral">
+        <div class="botoneslateral">
+     <h1>
+        <span>
+            <img src="/images/imagenperfil.svg">
+            <p>Telefono: <%=session.telefono%></p>
+            <p> <%=session.correo%></p>
+        </span>
+    </h1>
+
+        <a href="/pantallaReporteCiudadano">
+            Realizar reporte
+        </a>
+
+        <a href="/pantallaReporteRealizadoCiudadano">
+            Reportes realizados
+        </a>
+    </div>
+    </div>
+    
+    <div class="contenido">
+        <container class="contenedorent" id="reportesvis">
+            <h1>Reportes entrantes</h1>
+            <div id="allreportes">
+                <%data.forEach(function(data) { if(data.id_ciudadano==session.id_ciudadano ){%>
+                    <div class="reporteentrante">
+                        <img src="/images/v.svg">
+                        <p>
+                            <%= data.descripcion%>
+                        </p>
+                        <p>
+                            <%= formatDate(data.fecha)%>
+                        </p>
+                        <p>
+                            Estatus: <%= data.estatus%>
+                        </p>
+                        <p>
+                            <%= data.latitud + '' + data.longitud%>
+                        </p>
+                    </div>
+                    <% }}); %>
+            </div>
+        </container>
+    </div>
+    </article>
+</section>
+
+
+
+<%- include('partials/_footer')%>

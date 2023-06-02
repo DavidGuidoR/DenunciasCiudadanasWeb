@@ -92,24 +92,46 @@ controller.pruebapantsubirimagen = (req,res) => {
 
 
 //registro de usuarios
-controller.registro = (req,res) =>{
+controller.registro = (req, res) => {
     const actividad = 'Acceso al registro de usuario';
-  fs.appendFileSync('registro.txt', `${new Date().toISOString()}: ${actividad}\n`);
-    const ciudadano = req.body; // Suponiendo que el objeto JSON contiene todos los campos del post
-    console.log(ciudadano)
-  const query = 'INSERT INTO ciudadano SET ?';
-  req.getConnection((err, conn) => {
-  conn.query(query, ciudadano, (err, data) => {
-    if (err) {
-      console.error('Error al insertar el post en la base de datos: ', err);
-      res.status(500).json({ error: 'Error al registrar el post' });
-    } else {
-      console.log('Post registrado correctamente');
-      res.render('menuPrincipal');
-    }
-  });
-});
-}
+    fs.appendFileSync('registro.txt', `${new Date().toISOString()}: ${actividad}\n`);
+    const ciudadano = req.body; // Assuming the JSON object contains all the required fields
+    console.log(ciudadano);
+  
+    const queryCheckPhone = 'SELECT * FROM ciudadano WHERE telefono = ?';
+    req.getConnection((err, conn) => {
+      if (err) {
+        console.error('Error al establecer la conexión: ', err);
+        res.status(500).json({ error: 'Error al registrar el post' });
+        return;
+      }
+  
+      conn.query(queryCheckPhone, ciudadano.telefono, (err, results) => {
+        if (err) {
+          console.error('Error al consultar la base de datos: ', err);
+          res.status(500).json({ error: 'Error al registrar el post' });
+          return;
+        }
+  
+        if (results.length > 0) {
+          console.log('Teléfono duplicado');
+          res.send('Teléfono repetido');
+        } else {
+          const queryInsert = 'INSERT INTO ciudadano SET ?';
+          conn.query(queryInsert, ciudadano, (err, data) => {
+            if (err) {
+              console.error('Error al insertar el post en la base de datos: ', err);
+              res.status(500).json({ error: 'Error al registrar el post' });
+            } else {
+              console.log('Post registrado correctamente');
+              res.render('menuPrincipal');
+            }
+          });
+        }
+      });
+    });
+  };
+  
 
 // Inicio de sesion dinamico-------------------------------------------------------------------------------------------------------------
 controller.inicioSesion = (req, res) => {
@@ -1526,6 +1548,25 @@ controller.reporte = (req,res) =>{
     });  
 }
 
+
+controller.pantallaReporteRealizadoCiudadano = (req,res) =>{
+        const actividad = 'El moderador accedio a la pantalla de reportes entrantes';
+      fs.appendFileSync('registro.txt', `${new Date().toISOString()}: ${actividad}\n`);
+        function formatDate(date) {
+            const options = { day: '2-digit', month: '2-digit', year: '2-digit' };
+            const formattedDate = new Date(date).toLocaleDateString('es-ES', options);
+            return formattedDate;
+        }
+        req.getConnection((err, conn) => {
+            conn.query('SELECT r.id_reporte, r.fecha, r.descripcion, r.latitud, r.longitud, r.n_apoyos, r.estatus, r.n_denuncias, r.referencias, c.id_ciudadano , d.nombre AS nombre_dependencia, r.tipo_reporte FROM reporte r JOIN ciudadano c ON r.id_ciudadano = c.id_ciudadano JOIN dependencia d ON r.id_dependencia = d.id_dependencia', (err, reportes) => {
+                if (err) {
+                    res.json(err);
+                } else {
+                    res.render('ciudadanoreportesrealizados', { data: reportes, formatDate: formatDate });
+                }
+            })
+        });
+}
 
 //Clasees del bot
 controller.chat = (req, res) => {
